@@ -72,5 +72,12 @@ class GroceryTest {
     Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2025");
     assertFalse(grocery.isExpired());
   }
+
+  @Test
+  void testAddAmount() {
+    Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2025");
+    grocery.addAmount(1.0);
+    assertEquals(grocery.getAmount(), 2.0);
+  }
 }
 

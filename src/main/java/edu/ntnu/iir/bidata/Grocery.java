@@ -78,8 +78,10 @@ public class Grocery {
 
   /**
    * Checks if the food item is still valid based on the current date.
+   * <p>
+   * MÅ ENDRES PÅ CATCH DELEN... NBNB
    *
-   * @return true if the food item is still valid, false otherwise
+   * @return false if the food item is still valid, true otherwise
    */
   public boolean isExpired() {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -91,5 +93,14 @@ public class Grocery {
       e.printStackTrace();
       return false;
     }
+  }
+
+  /**
+   * Adds the specified amount to the current amount of the food item.
+   *
+   * @param amount the amount to be added to the current amount
+   */
+  public void addAmount(double amount) {
+    this.amount += amount;
   }
 }
