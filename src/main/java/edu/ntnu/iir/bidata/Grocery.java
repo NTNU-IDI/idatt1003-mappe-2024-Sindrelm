@@ -1,6 +1,9 @@
 package edu.ntnu.iir.bidata;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * Represents a grocery item with its details.
@@ -12,7 +15,7 @@ public class Grocery {
   private final String siUnit;
   private Double amount;
   private final Double price;
-  private final Date date;
+  private final String date;
 
   /**
    * Constructs a new Grocery item.
@@ -23,11 +26,11 @@ public class Grocery {
    * @param price    the price of the food item in kr
    * @param date     the expiration date of the food item
    */
-  public Grocery(String foodName, String siUnit, double amount, double price, Date date) {
+  public Grocery(String foodName, String siUnit, double amount, double price, String date) {
     if (foodName == null || siUnit == null || date == null) {
       throw new IllegalArgumentException("Food name, SI unit and date must be non-null");
     }
-    if (siUnit != "kg" || siUnit != "l") {
+    if (!siUnit.equals("kg") & !siUnit.equals("l")) {
       throw new IllegalArgumentException("SI unit must be kg or l");
     }
     this.foodName = foodName;
@@ -78,8 +81,15 @@ public class Grocery {
    *
    * @return true if the food item is still valid, false otherwise
    */
-  public boolean getHoldbarhet() {
-    Date dateToday = new Date();
-    return date.compareTo(dateToday) > 0;
+  public boolean isExpired() {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    try {
+      Date expirationDate = dateFormat.parse(date);
+      Date dateToday = new Date();
+      return expirationDate.compareTo(dateToday) < 0;
+    } catch (ParseException e) {
+      e.printStackTrace();
+      return false;
+    }
   }
 }
