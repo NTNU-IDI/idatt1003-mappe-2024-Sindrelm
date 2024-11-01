@@ -113,4 +113,17 @@ public class FoodStorage {
     }
     throw new IllegalArgumentException("Grocery does not exist");
   }
+
+  public ArrayList<Grocery> getExpiredGroceries() {
+    ArrayList<Grocery> expiredGroceries = new ArrayList<Grocery>();
+    int i = 0;
+    while (i < groceries.size()) {
+      if (groceries.get(i).isExpired()) {
+        expiredGroceries.add(groceries.get(i));
+      }
+      i++;
+    }
+    return expiredGroceries;
+  }
 }
+

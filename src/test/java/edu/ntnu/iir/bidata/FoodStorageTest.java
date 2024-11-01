@@ -83,4 +83,12 @@ public class FoodStorageTest {
     foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
     assertTrue(foodStorage.groceryExists("Apple"));
   }
+
+  @Test
+  void testGetExpiredGroceries() {
+    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
+    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
+    foodStorage.addGrocery("Banana", "kg", 1.0, 10.0, "19.02.2026");
+    assertEquals(1, foodStorage.getExpiredGroceries().size());
+  }
 }
