@@ -108,4 +108,12 @@ public class FoodStorageTest {
     foodStorage.addGrocery("Banana", "kg", 1.0, 10.0, "19.02.2024");
     assertEquals(2, foodStorage.getExpireBefore("19.02.2026").size());
   }
+
+  @Test
+  void testGetSortedGroceries() {
+    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
+    foodStorage.addGrocery("Banana", "kg", 1.0, 10.0, "19.02.2024");
+    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2024");
+    assertEquals("Apple", foodStorage.getSortedGroceries().get(0).getFoodName());
+  }
 }

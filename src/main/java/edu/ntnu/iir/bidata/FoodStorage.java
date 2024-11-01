@@ -3,6 +3,7 @@ package edu.ntnu.iir.bidata;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -153,6 +154,16 @@ public class FoodStorage {
       i++;
     }
     return expireBefore;
+  }
+
+  /**
+   * Sorts the groceries list alphabetically by their food name and returns the sorted list.
+   *
+   * @return the sorted list of grocery items
+   */
+  public ArrayList<Grocery> getSortedGroceries() {
+    groceries.sort(Comparator.comparing(Grocery::getFoodName));
+    return groceries;
   }
 }
 
