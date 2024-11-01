@@ -19,6 +19,17 @@ public class FoodStorage {
   }
 
   /**
+   * Retrieves a grocery item from the storage by its food name.
+   *
+   * @param foodName the name of the food item to retrieve
+   * @return the grocery item with the specified food name, or null if not found
+   */
+  public Grocery getGrocery(String foodName) {
+    int i = getGroceryInd(foodName);
+    return groceries.get(i);
+  }
+
+  /**
    * Adds a grocery item to the storage. If the grocery item already exists, it adds the specified
    * amount to the existing item.
    *
@@ -28,8 +39,16 @@ public class FoodStorage {
     if (!groceryExists(grocery.getFoodName())) {
       groceries.add(grocery);
     } else {
-      int i = getGroceryInd(grocery);
+      int i = getGroceryInd(grocery.getFoodName());
       groceries.get(i).addAmount(grocery.getAmount());
+    }
+  }
+
+  public void removeGroceryAmount(String foodName, double Amount) {
+    if (groceryExists(foodName)) {
+      getGrocery(foodName).addAmount(-Amount);
+    } else {
+      throw new IllegalArgumentException("Grocery does not exist");
     }
   }
 
@@ -53,11 +72,10 @@ public class FoodStorage {
   /**
    * Gets the index of the grocery item in the storage.
    *
-   * @param grocery the grocery item to find
+   * @param foodName the grocery item to find
    * @return the index of the grocery item, or -1 if not found
    */
-  public int getGroceryInd(Grocery grocery) {
-    String foodName = grocery.getFoodName();
+  public int getGroceryInd(String foodName) {
     int i = 0;
     while (i < groceries.size()) {
       if (groceries.get(i).getFoodName().equals(foodName)) {

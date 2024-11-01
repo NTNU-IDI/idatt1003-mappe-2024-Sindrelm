@@ -103,4 +103,13 @@ public class Grocery {
   public void addAmount(double amount) {
     this.amount += amount;
   }
+
+  /**
+   * Returns a string representation of the grocery item.
+   *
+   * @return a string containing the food name, amount, SI unit, price, and expiration date
+   */
+  public String toString() {
+    return foodName + ", " + amount + " " + siUnit + ", " + price + " kr, " + date;
+  }
 }

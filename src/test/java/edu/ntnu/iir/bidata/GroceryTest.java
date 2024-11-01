@@ -79,5 +79,12 @@ class GroceryTest {
     grocery.addAmount(1.0);
     assertEquals(grocery.getAmount(), 2.0);
   }
+
+  @Test
+  void testToString() {
+    Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2025");
+    String expected = "Apple, 1.0 kg, 10.0 kr, 19.02.2025";
+    assertEquals(grocery.toString(), expected);
+  }
 }
 
