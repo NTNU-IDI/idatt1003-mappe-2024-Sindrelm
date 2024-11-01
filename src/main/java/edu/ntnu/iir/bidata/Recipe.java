@@ -34,4 +34,31 @@ public class Recipe {
     this.portions = portions;
   }
 
+  public ArrayList<Grocery> getGroceries() {
+    return groceries;
+  }
+
+  public void addGrocery(String foodName, String siUnit, double amount, double price) {
+    groceries.add(new Grocery(foodName, siUnit, amount, price, "00.00.0000"));
+  }
+
+  public boolean checkFoodStorage(FoodStorage foodStorage) {
+    int i = 0;
+    while (i < groceries.size()) {
+      try {
+        double recipeAmount = groceries.get(i).getAmount();
+        double foodStorageAmount = foodStorage.getGrocery(groceries.get(i).getFoodName())
+            .getAmount();
+        double amountDifference = foodStorageAmount - recipeAmount;
+        if (amountDifference < 0) {
+          return false;
+        } else if (amountDifference >= 0) {
+          i++;
+        }
+      } catch (IllegalArgumentException e) {
+        return false;
+      }
+    }
+    return true;
+  }
 }
