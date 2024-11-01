@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.ParseException;
+
 import org.junit.jupiter.api.Test;
 
 class GroceryTest {
@@ -59,6 +63,13 @@ class GroceryTest {
     Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
     double amount = grocery.getAmount();
     assertEquals(amount, 1.0);
+  }
+
+  @Test
+  void testGetExpirationDate() throws ParseException {
+    Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
+    Date expirationDate = grocery.getExpirationDate();
+    assertEquals(expirationDate, new SimpleDateFormat("dd.MM.yyyy").parse("19.02.2004"));
   }
 
   @Test
