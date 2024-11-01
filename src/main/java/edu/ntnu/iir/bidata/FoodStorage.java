@@ -125,5 +125,10 @@ public class FoodStorage {
     }
     return expiredGroceries;
   }
+
+  public ArrayList<Grocery> getExpireBefore(String date) {
+    ArrayList<Grocery> expireBefore = new ArrayList<Grocery>();
+
+  }
 }
 
