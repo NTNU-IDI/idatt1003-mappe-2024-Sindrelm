@@ -117,6 +117,11 @@ public class FoodStorage {
     throw new IllegalArgumentException("Grocery does not exist");
   }
 
+  /**
+   * Gets a list of grocery items that have expired.
+   *
+   * @return a list of grocery items that have expired
+   */
   public ArrayList<Grocery> getExpiredGroceries() {
     ArrayList<Grocery> expiredGroceries = new ArrayList<Grocery>();
     int i = 0;
@@ -129,6 +134,13 @@ public class FoodStorage {
     return expiredGroceries;
   }
 
+  /**
+   * Gets a list of grocery items that expire before the specified date.
+   *
+   * @param date the date to compare with
+   * @return a list of grocery items that expire before the specified date
+   * @throws ParseException if the date is not in the correct format
+   */
   public ArrayList<Grocery> getExpireBefore(String date) throws ParseException {
     ArrayList<Grocery> expireBefore = new ArrayList<Grocery>();
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
