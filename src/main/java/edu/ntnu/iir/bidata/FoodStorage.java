@@ -1,6 +1,9 @@
 package edu.ntnu.iir.bidata;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Represents a storage for grocery items.
@@ -126,8 +129,17 @@ public class FoodStorage {
     return expiredGroceries;
   }
 
-  public ArrayList<Grocery> getExpireBefore(String date) {
+  public ArrayList<Grocery> getExpireBefore(String date) throws ParseException {
     ArrayList<Grocery> expireBefore = new ArrayList<Grocery>();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    Date expireBeforeDate = dateFormat.parse(date);
+    int i = 0;
+    while (i < groceries.size()) {
+      if (expireBeforeDate.after(groceries.get(i).getExpirationDate())) {
+        expireBefore.add(groceries.get(i));
+      }
+      i++;
+    }
     return expireBefore;
   }
 }

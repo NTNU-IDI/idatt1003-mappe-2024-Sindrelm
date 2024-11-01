@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
@@ -90,5 +91,21 @@ public class FoodStorageTest {
     foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
     foodStorage.addGrocery("Banana", "kg", 1.0, 10.0, "19.02.2026");
     assertEquals(1, foodStorage.getExpiredGroceries().size());
+  }
+
+  @Test
+  void testGetExpiredGroceriesEmpty() {
+    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
+    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2026");
+    foodStorage.addGrocery("Banana", "kg", 1.0, 10.0, "19.02.2026");
+    assertEquals(0, foodStorage.getExpiredGroceries().size());
+  }
+
+  @Test
+  void testGetExpireBefore() throws ParseException {
+    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
+    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2024");
+    foodStorage.addGrocery("Banana", "kg", 1.0, 10.0, "19.02.2024");
+    assertEquals(2, foodStorage.getExpireBefore("19.02.2026").size());
   }
 }
