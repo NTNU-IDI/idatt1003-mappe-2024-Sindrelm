@@ -51,9 +51,18 @@ public class FoodStorage {
     }
   }
 
+  public void removeGrocery(String foodName) {
+    int groceryIndex = getGroceryInd(foodName);
+    groceries.remove(groceryIndex);
+  }
+
   public void removeGroceryAmount(String foodName, double Amount) {
     if (groceryExists(foodName)) {
-      getGrocery(foodName).addAmount(-Amount);
+      Grocery grocery = getGrocery(foodName);
+      grocery.addAmount(-Amount);
+      if (grocery.getAmount() <= 0) {
+        removeGrocery(foodName);
+      }
     } else {
       throw new IllegalArgumentException("Grocery does not exist");
     }
@@ -90,6 +99,6 @@ public class FoodStorage {
       }
       i++;
     }
-    return -1;
+    throw new IllegalArgumentException("Grocery does not exist");
   }
 }

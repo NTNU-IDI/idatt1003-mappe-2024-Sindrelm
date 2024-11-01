@@ -25,7 +25,7 @@ public class FoodStorageTest {
   }
 
   @Test
-  void testGetGroceryInd() {
+  void testGetGroceryIndex() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
     foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
     assertEquals(0, foodStorage.getGroceryInd("Apple"));
@@ -49,9 +49,9 @@ public class FoodStorageTest {
   @Test
   void testRemoveGroceryAmount() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
+    foodStorage.addGrocery("Apple", "kg", 2.0, 10.0, "19.02.2004");
     foodStorage.removeGroceryAmount("Apple", 1.0);
-    assertEquals(0.0, foodStorage.getGrocery("Apple").getAmount());
+    assertEquals(1.0, foodStorage.getGrocery("Apple").getAmount());
   }
 
   @Test
@@ -60,5 +60,27 @@ public class FoodStorageTest {
     foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
     assertThrows(IllegalArgumentException.class,
         () -> foodStorage.removeGroceryAmount("Banana", 1.0));
+  }
+
+  @Test
+  void testRemoveGrocery() {
+    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
+    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
+    foodStorage.removeGrocery("Apple");
+    assertFalse(foodStorage.groceryExists("Apple"));
+  }
+
+  @Test
+  void testRemoveGroceryNotExists() {
+    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
+    assertThrows(IllegalArgumentException.class,
+        () -> foodStorage.removeGrocery("Banana"));
+  }
+
+  @Test
+  void testGroceryExists() {
+    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
+    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
+    assertTrue(foodStorage.groceryExists("Apple"));
   }
 }
