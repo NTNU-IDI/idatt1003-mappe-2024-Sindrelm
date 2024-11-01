@@ -23,7 +23,7 @@ public class Grocery {
    * @param foodName the name of the food item
    * @param siUnit   the SI unit of the food item (kg or l)
    * @param amount   the amount of the food item
-   * @param price    the price of the food item in kr
+   * @param price    the price of the food item in kr/kg or kr/l
    * @param date     the expiration date of the food item
    */
   public Grocery(String foodName, String siUnit, double amount, double price, String date) {
@@ -73,7 +73,7 @@ public class Grocery {
    * @return the price of the food item
    */
   public double getPrice() {
-    return price;
+    return price * amount;
   }
 
   /**

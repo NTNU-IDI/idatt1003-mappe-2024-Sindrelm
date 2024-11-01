@@ -11,9 +11,9 @@ class GroceryTest {
 
   @Test
   void getPrice() {
-    Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
+    Grocery grocery = new Grocery("Apple", "kg", 2.0, 10.0, "19.02.2004");
     double price = grocery.getPrice();
-    assertEquals(price, 10.0);
+    assertEquals(price, 20.0);
   }
 
   @Test
