@@ -26,6 +26,9 @@ public class FoodStorage {
    */
   public Grocery getGrocery(String foodName) {
     int i = getGroceryInd(foodName);
+    if (i == -1) {
+      return null;
+    }
     return groceries.get(i);
   }
 
@@ -33,14 +36,18 @@ public class FoodStorage {
    * Adds a grocery item to the storage. If the grocery item already exists, it adds the specified
    * amount to the existing item.
    *
-   * @param grocery the grocery item to be added
+   * @param foodName the name of the food item to add
+   * @param siUnit   the SI unit of the food item
+   * @param amount   the amount of the food item
+   * @param price    the price of the food item
+   * @param date     the expiration date of the food item
    */
-  public void addGrocery(Grocery grocery) {
-    if (!groceryExists(grocery.getFoodName())) {
-      groceries.add(grocery);
+  public void addGrocery(String foodName, String siUnit, double amount, double price, String date) {
+    if (!groceryExists(foodName)) {
+      groceries.add(new Grocery(foodName, siUnit, amount, price, date));
     } else {
-      int i = getGroceryInd(grocery.getFoodName());
-      groceries.get(i).addAmount(grocery.getAmount());
+      int groceryIndex = getGroceryInd(foodName);
+      groceries.get(groceryIndex).addAmount(amount);
     }
   }
 
