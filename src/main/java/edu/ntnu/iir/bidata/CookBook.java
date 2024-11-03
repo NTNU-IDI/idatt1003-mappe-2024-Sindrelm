@@ -34,8 +34,21 @@ public class CookBook {
     return cookBookRegister.toString();
   }
 
+  public String getRecipeSuggestions(FoodStorage foodStorage) {
+    StringBuilder recipeSuggestions = new StringBuilder();
+    int i = 0;
+    while (i < recipes.size()) {
+      if (recipes.get(i).checkFoodStorage(foodStorage)) {
+        recipeSuggestions.append(recipes.get(i).getShortDescription()).append("\n");
+      }
+      i++;
+    }
+    return recipeSuggestions.toString();
+  }
+
   public void addRecipe(Recipe recipe) {
     this.recipes.add(recipe);
   }
+
 
 }
