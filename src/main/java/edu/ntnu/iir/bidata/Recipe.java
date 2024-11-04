@@ -72,6 +72,21 @@ public class Recipe {
   }
 
   /**
+   * Calculates the total price of the recipe based on the prices of the groceries.
+   *
+   * @return the total price of the recipe
+   */
+  public double getRecipePrice() {
+    double recipePrice = 0;
+    int i = 0;
+    while (i < groceries.size()) {
+      recipePrice += groceries.get(i).getPrice();
+      i++;
+    }
+    return recipePrice;
+  }
+
+  /**
    * Adds a grocery item to the recipe.
    *
    * @param foodName the name of the food item

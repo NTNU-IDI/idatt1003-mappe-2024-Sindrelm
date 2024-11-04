@@ -17,6 +17,14 @@ public class RecipeTest {
   }
 
   @Test
+  void testGetRecipePrice() {
+    Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
+    Grocery grocery = new Grocery("apple", "kg", 1.0, 1.0, "01.01.2021");
+    recipe.addGrocery("apple", "kg", 1.0, 1.0);
+    assertEquals(recipe.getRecipePrice(), 1.0);
+  }
+
+  @Test
   void testAddGrocery() {
     Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
     recipe.addGrocery("apple", "kg", 1.0, 1.0);
