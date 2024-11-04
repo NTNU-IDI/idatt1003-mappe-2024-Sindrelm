@@ -7,7 +7,6 @@ public class App {
 
   private static FoodStorage foodStorage;
   private static CookBook cookBook;
-  private Recipe pannekakerOppskrift;
 
   public void init() {
     foodStorage = new FoodStorage(new ArrayList<Grocery>());
