@@ -35,38 +35,87 @@ public class Recipe {
     this.nrOfPortions = nrOfPortions;
   }
 
+  /**
+   * Gets the list of groceries required for the recipe.
+   *
+   * @return the list of groceries
+   */
   public ArrayList<Grocery> getGroceries() {
     return groceries;
   }
 
+  /**
+   * Gets the short description of the recipe.
+   *
+   * @return the short description
+   */
   public String getShortDescription() {
     return shortDescription;
   }
 
+  /**
+   * Gets the method or instructions to prepare the recipe.
+   *
+   * @return the method
+   */
   public String getMethod() {
     return method;
   }
 
+  /**
+   * Gets the number of portions the recipe yields.
+   *
+   * @return the number of portions
+   */
   public int getNrOfPortions() {
     return nrOfPortions;
   }
 
+  /**
+   * Adds a grocery item to the recipe.
+   *
+   * @param foodName the name of the food item
+   * @param siUnit   the SI unit of the food item
+   * @param amount   the amount of the food item
+   * @param price    the price of the food item
+   */
   public void addGrocery(String foodName, String siUnit, double amount, double price) {
     groceries.add(new Grocery(foodName, siUnit, amount, price, "00.00.0000"));
   }
 
+  /**
+   * Updates the short description of the recipe.
+   *
+   * @param shortDescription the new short description
+   */
   public void addShortDescription(String shortDescription) {
     this.shortDescription = shortDescription;
   }
 
+  /**
+   * Updates the method or instructions to prepare the recipe.
+   *
+   * @param method the new method
+   */
   public void addMethod(String method) {
     this.method = method;
   }
 
+  /**
+   * Updates the number of portions the recipe yields.
+   *
+   * @param nrOfPortions the new number of portions
+   */
   public void addNumberOfPortions(int nrOfPortions) {
     this.nrOfPortions = nrOfPortions;
   }
 
+  /**
+   * Checks if the required groceries for the recipe are available in the food storage.
+   *
+   * @param foodStorage the food storage to check against
+   * @return true if all required groceries are available in sufficient amounts, false otherwise
+   */
   public boolean checkFoodStorage(FoodStorage foodStorage) {
     int i = 0;
     while (i < groceries.size()) {
