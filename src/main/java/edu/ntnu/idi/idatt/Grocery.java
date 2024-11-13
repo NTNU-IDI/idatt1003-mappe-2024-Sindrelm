@@ -1,4 +1,4 @@
-package edu.ntnu.iir.bidata;
+package edu.ntnu.idi.idatt;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

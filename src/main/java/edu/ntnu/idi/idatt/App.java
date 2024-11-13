@@ -1,4 +1,4 @@
-package edu.ntnu.iir.bidata;
+package edu.ntnu.idi.idatt;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -35,15 +35,6 @@ public class App {
   public static void main(String[] args) throws ParseException {
     App app = new App();
     app.start();
-
-    System.out.println(foodStorage.getSortedGroceries());
-    System.out.println("");
-
-    System.out.println(cookBook.getRecipeSuggestions(foodStorage));
-    System.out.println("");
-
-    System.out.println(foodStorage.getExpireBefore("01.01.2025"));
-
 
   }
 
