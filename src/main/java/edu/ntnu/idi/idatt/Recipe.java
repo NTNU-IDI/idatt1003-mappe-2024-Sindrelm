@@ -86,6 +86,21 @@ public class Recipe {
     return recipePrice;
   }
 
+  public String getRecipeInformation() {
+    StringBuilder recipeInformation = new StringBuilder();
+    recipeInformation.append("Recipe: ").append(shortDescription).append("\n");
+    recipeInformation.append("Method: ").append(method).append("\n");
+    recipeInformation.append("Number of portions: ").append(nrOfPortions).append("\n");
+    recipeInformation.append("Groceries: \n");
+    for (Grocery grocery : groceries) {
+      recipeInformation.append(grocery.getFoodName()).append(", ");
+      recipeInformation.append(grocery.getUnit()).append(", ");
+      recipeInformation.append(grocery.getAmount()).append(", ");
+      recipeInformation.append(grocery.getPrice()).append("\n");
+    }
+    return recipeInformation.toString();
+  }
+
   /**
    * Adds a grocery item to the recipe.
    *
