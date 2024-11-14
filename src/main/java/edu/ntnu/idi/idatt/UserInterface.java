@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class UserInterface {
 
   public static FoodStorage foodStorage;
-  private static CookBook cookBook;
+  public static CookBook cookBook;
 
   public void init() {
     foodStorage = new FoodStorage(new ArrayList<Grocery>());
@@ -56,7 +56,7 @@ public class UserInterface {
       switch (choice) {
         case 0 -> run = false;
         case 1 -> {
-
+          CookBookView.menu();
         }
         case 2 -> {
           FoodStorageView.menu();
