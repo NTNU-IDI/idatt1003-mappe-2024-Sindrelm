@@ -11,12 +11,7 @@ public class UserInterface {
   public void init() {
     foodStorage = new FoodStorage(new ArrayList<Grocery>());
     cookBook = new CookBook(new ArrayList<Recipe>());
-    boolean run;
-  }
 
-
-  public void start() {
-    init();
     foodStorage.addGrocery("Milk", "l", 1, 20, "19.11.2020");
     foodStorage.addGrocery("Egg", "kg", 0.6, 50, "28.11.2024");
     foodStorage.addGrocery("Flour", "kg", 1, 27, "31.12.2028");
@@ -31,11 +26,12 @@ public class UserInterface {
     salatOppskrift.addGrocery("Apple", "kg", 0.5, 32);
     salatOppskrift.addGrocery("Mango", "kg", 0.5, 65);
     salatOppskrift.addGrocery("Salatblader", "kg", 0.5, 29);
-    cookBook.addRecipe(salatOppskrift);
+
+    boolean run;
   }
 
-  public void menu() throws ParseException {
-    start();
+  public void start() throws ParseException {
+    init();
     boolean run = true;
     while (run) {
       System.out.print("""

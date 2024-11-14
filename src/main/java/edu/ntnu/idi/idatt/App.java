@@ -10,5 +10,4 @@ public class App {
     userInterface.init();
     userInterface.menu();
   }
-
 }
