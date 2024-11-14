@@ -5,8 +5,14 @@ import static edu.ntnu.idi.idatt.UserInterface.foodStorage;
 
 import java.util.ArrayList;
 
+/**
+ * The view class for interacting with the cookbook.
+ */
 public class CookBookView {
 
+  /**
+   * Displays the menu for the cookbook and handles user input.
+   */
   public static void menu() {
 
     boolean runCookBook = true;
@@ -30,9 +36,7 @@ public class CookBookView {
       }
 
       switch (choice) {
-        case 0 -> {
-          runCookBook = false;
-        }
+        case 0 -> runCookBook = false;
         case 1 -> {
           System.out.println("Enter name of recipe:");
           String name = System.console().readLine();
@@ -56,7 +60,7 @@ public class CookBookView {
             System.out.println("Enter the price per/kg for the " + i + ". ingredient:");
             double price = Double.parseDouble(System.console().readLine());
 
-            recipe.addGrocery(foodName, siUnit, price, price);
+            recipe.addGrocery(foodName, siUnit, amount, price);
             i++;
           }
 
@@ -79,5 +83,4 @@ public class CookBookView {
       }
     }
   }
-
 }
