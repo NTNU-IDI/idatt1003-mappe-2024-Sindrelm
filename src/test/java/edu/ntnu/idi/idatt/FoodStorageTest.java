@@ -9,8 +9,14 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for the FoodStorage class.
+ */
 public class FoodStorageTest {
 
+  /**
+   * Tests adding a grocery to the food storage.
+   */
   @Test
   void testAddGrocery() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
@@ -18,6 +24,9 @@ public class FoodStorageTest {
     assertTrue(foodStorage.groceryExists("Apple"));
   }
 
+  /**
+   * Tests that a grocery does not exist in the food storage.
+   */
   @Test
   void testGroceryNotExists() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
@@ -25,6 +34,9 @@ public class FoodStorageTest {
     assertFalse(foodStorage.groceryExists("Banana"));
   }
 
+  /**
+   * Tests getting the index of a grocery in the food storage.
+   */
   @Test
   void testGetGroceryIndex() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
@@ -32,6 +44,9 @@ public class FoodStorageTest {
     assertEquals(0, foodStorage.getGroceryInd("Apple"));
   }
 
+  /**
+   * Tests adding an existing grocery to the food storage.
+   */
   @Test
   void testAddGroceryExisting() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
@@ -40,6 +55,9 @@ public class FoodStorageTest {
     assertEquals(2.0, foodStorage.getGrocery("Apple").getAmount());
   }
 
+  /**
+   * Tests getting a grocery from the food storage.
+   */
   @Test
   void testGetGrocery() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
@@ -47,6 +65,9 @@ public class FoodStorageTest {
     assertEquals("Apple", foodStorage.getGrocery("Apple").getFoodName());
   }
 
+  /**
+   * Tests removing an amount of a grocery from the food storage.
+   */
   @Test
   void testRemoveGroceryAmount() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
@@ -55,6 +76,9 @@ public class FoodStorageTest {
     assertEquals(1.0, foodStorage.getGrocery("Apple").getAmount());
   }
 
+  /**
+   * Tests removing an amount of a grocery that does not exist in the food storage.
+   */
   @Test
   void testRemoveGroceryAmountNotExists() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
@@ -63,6 +87,9 @@ public class FoodStorageTest {
         () -> foodStorage.removeGroceryAmount("Banana", 1.0));
   }
 
+  /**
+   * Tests removing a grocery from the food storage.
+   */
   @Test
   void testRemoveGrocery() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
@@ -71,6 +98,9 @@ public class FoodStorageTest {
     assertFalse(foodStorage.groceryExists("Apple"));
   }
 
+  /**
+   * Tests removing a grocery that does not exist in the food storage.
+   */
   @Test
   void testRemoveGroceryNotExists() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
@@ -78,6 +108,9 @@ public class FoodStorageTest {
         () -> foodStorage.removeGrocery("Banana"));
   }
 
+  /**
+   * Tests that a grocery exists in the food storage.
+   */
   @Test
   void testGroceryExists() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
@@ -85,6 +118,9 @@ public class FoodStorageTest {
     assertTrue(foodStorage.groceryExists("Apple"));
   }
 
+  /**
+   * Tests getting expired groceries from the food storage.
+   */
   @Test
   void testGetExpiredGroceries() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
@@ -93,6 +129,9 @@ public class FoodStorageTest {
     assertEquals(1, foodStorage.getExpiredGroceries().size());
   }
 
+  /**
+   * Tests getting expired groceries from the food storage when there are no expired groceries.
+   */
   @Test
   void testGetExpiredGroceriesEmpty() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
@@ -101,6 +140,11 @@ public class FoodStorageTest {
     assertEquals(0, foodStorage.getExpiredGroceries().size());
   }
 
+  /**
+   * Tests getting groceries that expire before a given date from the food storage.
+   *
+   * @throws ParseException if there is an error during parsing
+   */
   @Test
   void testGetExpireBefore() throws ParseException {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
@@ -109,6 +153,9 @@ public class FoodStorageTest {
     assertEquals(2, foodStorage.getExpireBefore("19.02.2026").size());
   }
 
+  /**
+   * Tests getting sorted groceries from the food storage.
+   */
   @Test
   void testGetSortedGroceries() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());

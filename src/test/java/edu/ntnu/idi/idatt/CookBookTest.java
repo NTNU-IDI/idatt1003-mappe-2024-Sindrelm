@@ -5,8 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for the CookBook class.
+ */
 public class CookBookTest {
 
+  /**
+   * Tests that an exception is thrown when trying to get the index of a recipe that does not
+   * exist.
+   */
   @Test
   public void testGetRecipeIndexNotFound() {
     // Arrange
@@ -19,9 +26,11 @@ public class CookBookTest {
       // Assert
       assertEquals("Recipe not found", e.getMessage());
     }
-
   }
 
+  /**
+   * Tests that the correct recipe is returned when getting a recipe by its description.
+   */
   @Test
   public void testGetRecipe() {
     // Arrange
@@ -40,6 +49,9 @@ public class CookBookTest {
     assertEquals(recipe2, recipe2FromCookBook);
   }
 
+  /**
+   * Tests that the cookbook register is returned correctly.
+   */
   @Test
   public void testGetCookBookRegister() {
     // Arrange
@@ -56,6 +68,9 @@ public class CookBookTest {
     assertEquals("Short description 1\nShort description 2\n", cookBookRegister);
   }
 
+  /**
+   * Tests that the correct recipe suggestions are returned based on the food storage.
+   */
   @Test
   public void testGetRecipeSuggestions() {
     // Arrange
@@ -79,5 +94,4 @@ public class CookBookTest {
     // Assert
     assertEquals("Short description 1\nShort description 2\n", recipeSuggestions);
   }
-
 }
