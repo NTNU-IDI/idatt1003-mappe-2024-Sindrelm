@@ -86,6 +86,11 @@ public class Recipe {
     return recipePrice;
   }
 
+  /**
+   * Gets the detailed information of the recipe.
+   *
+   * @return a string containing the detailed information of the recipe
+   */
   public String getRecipeInformation() {
     StringBuilder recipeInformation = new StringBuilder();
     recipeInformation.append("Recipe: ").append(shortDescription).append("\n");
