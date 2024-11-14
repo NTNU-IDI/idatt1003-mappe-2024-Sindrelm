@@ -26,6 +26,7 @@ public class UserInterface {
     salatOppskrift.addGrocery("Apple", "kg", 0.5, 32);
     salatOppskrift.addGrocery("Mango", "kg", 0.5, 65);
     salatOppskrift.addGrocery("Salatblader", "kg", 0.5, 29);
+    cookBook.addRecipe(salatOppskrift);
 
     boolean run;
   }

@@ -8,6 +8,6 @@ public class App {
   public static void main(String[] args) throws ParseException {
     UserInterface userInterface = new UserInterface();
     userInterface.init();
-    userInterface.menu();
+    userInterface.start();
   }
 }
