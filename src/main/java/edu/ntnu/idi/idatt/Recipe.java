@@ -80,7 +80,7 @@ public class Recipe {
     double recipePrice = 0;
     int i = 0;
     while (i < groceries.size()) {
-      recipePrice += groceries.get(i).getPrice();
+      recipePrice += groceries.get(i).getPrice() * groceries.get(i).getAmount();
       i++;
     }
     return recipePrice;
@@ -94,9 +94,9 @@ public class Recipe {
     recipeInformation.append("Groceries: \n");
     for (Grocery grocery : groceries) {
       recipeInformation.append(grocery.getFoodName()).append(", ");
+      recipeInformation.append(grocery.getAmount());
       recipeInformation.append(grocery.getUnit()).append(", ");
-      recipeInformation.append(grocery.getAmount()).append(", ");
-      recipeInformation.append(grocery.getPrice()).append("\n");
+      recipeInformation.append(grocery.getPrice()).append("kr \n");
     }
     return recipeInformation.toString();
   }
