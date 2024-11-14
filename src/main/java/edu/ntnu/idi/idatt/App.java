@@ -1,7 +1,6 @@
 package edu.ntnu.idi.idatt;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 
 /**
  * The main application class that initializes and starts the user interface.

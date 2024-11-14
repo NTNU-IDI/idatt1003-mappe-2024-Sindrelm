@@ -4,8 +4,16 @@ import static edu.ntnu.idi.idatt.UserInterface.foodStorage;
 
 import java.text.ParseException;
 
+/**
+ * The view class for interacting with the food storage.
+ */
 public class FoodStorageView {
 
+  /**
+   * Displays the menu for the food storage and handles user input.
+   *
+   * @throws ParseException if there is an error during parsing
+   */
   public static void menu() throws ParseException {
     boolean runFoodStorageMenu = true;
     while (runFoodStorageMenu) {
@@ -30,9 +38,7 @@ public class FoodStorageView {
       }
 
       switch (choice) {
-        case 0 -> {
-          runFoodStorageMenu = false;
-        }
+        case 0 -> runFoodStorageMenu = false;
         case 1 -> {
           System.out.println("Enter name of grocery:");
           String name = System.console().readLine();
@@ -77,6 +83,4 @@ public class FoodStorageView {
       }
     }
   }
-
-
 }

@@ -3,11 +3,18 @@ package edu.ntnu.idi.idatt;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+/**
+ * The UserInterface class initializes the food storage and cookbook, and provides a menu for user
+ * interaction.
+ */
 public class UserInterface {
 
   public static FoodStorage foodStorage;
   public static CookBook cookBook;
 
+  /**
+   * Initializes the food storage and cookbook with some default values.
+   */
   public void init() {
     foodStorage = new FoodStorage(new ArrayList<Grocery>());
     cookBook = new CookBook(new ArrayList<Recipe>());
@@ -31,6 +38,11 @@ public class UserInterface {
     boolean run;
   }
 
+  /**
+   * Starts the user interface, displaying the main menu and handling user input.
+   *
+   * @throws ParseException if there is an error during parsing
+   */
   public void start() throws ParseException {
     init();
     boolean run = true;
