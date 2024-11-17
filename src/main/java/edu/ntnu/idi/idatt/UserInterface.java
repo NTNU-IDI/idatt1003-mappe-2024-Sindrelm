@@ -71,7 +71,7 @@ public class UserInterface {
           FoodStorageView.menu();
         }
         default -> {
-          System.out.println("Invalid choice");
+          System.out.println("Invalid input");
         }
       }
     }
