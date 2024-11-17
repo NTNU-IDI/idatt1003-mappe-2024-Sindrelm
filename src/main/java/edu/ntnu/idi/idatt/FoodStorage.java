@@ -72,6 +72,9 @@ public class FoodStorage {
    * @throws IllegalArgumentException if the grocery item does not exist
    */
   public void removeGroceryAmount(String foodName, double amount) {
+    if (amount < 0) {
+      throw new IllegalArgumentException("Amount to remove must be positive");
+    }
     if (groceryExists(foodName)) {
       Grocery grocery = getGrocery(foodName);
       grocery.addAmount(-amount);

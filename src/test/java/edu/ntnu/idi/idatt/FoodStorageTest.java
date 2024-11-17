@@ -108,6 +108,14 @@ public class FoodStorageTest {
         () -> foodStorage.removeGrocery("Banana"));
   }
 
+  @Test
+  void testRemoveGroceryAmountNegative() {
+    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
+    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
+    assertThrows(IllegalArgumentException.class,
+        () -> foodStorage.removeGroceryAmount("Apple", -1.0));
+  }
+
   /**
    * Tests that a grocery exists in the food storage.
    */
