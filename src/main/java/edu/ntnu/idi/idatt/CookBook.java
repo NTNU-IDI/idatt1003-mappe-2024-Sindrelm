@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class CookBook {
 
-  private ArrayList<Recipe> recipes;
+  private final ArrayList<Recipe> recipes;
 
   /**
    * Constructs a new CookBook.
@@ -33,7 +33,7 @@ public class CookBook {
       }
       i++;
     }
-    throw new IllegalArgumentException("Recipe not found");
+    throw new IllegalArgumentException("Recipe not found in Cook Book");
   }
 
   /**
