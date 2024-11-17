@@ -40,33 +40,45 @@ public class FoodStorageView {
       switch (choice) {
         case 0 -> runFoodStorageMenu = false;
         case 1 -> {
-          System.out.println("Enter name of grocery:");
-          String name = System.console().readLine();
-          System.out.println("Enter SI unit of grocery:");
-          String siUnit = System.console().readLine();
-          System.out.println("Enter amount of grocery:");
-          double amount = Double.parseDouble(System.console().readLine());
-          System.out.println("Enter price of grocery:");
-          double price = Double.parseDouble(System.console().readLine());
-          System.out.println("Enter expiration date of grocery(DD.MM.YYYY):");
-          String date = System.console().readLine();
+          try {
+            System.out.println("Enter name of grocery:");
+            String name = System.console().readLine();
+            System.out.println("Enter SI unit of grocery:");
+            String siUnit = System.console().readLine();
+            System.out.println("Enter amount of grocery:");
+            double amount = Double.parseDouble(System.console().readLine());
+            System.out.println("Enter price of grocery:");
+            double price = Double.parseDouble(System.console().readLine());
+            System.out.println("Enter expiration date of grocery(DD.MM.YYYY):");
+            String date = System.console().readLine();
 
-          foodStorage.addGrocery(name, siUnit, amount, price, date);
-          System.out.println("Grocery added to food storage");
+            foodStorage.addGrocery(name, siUnit, amount, price, date);
+            System.out.println("Grocery added to food storage");
+          } catch (Exception e) {
+            System.out.println("Invalid input");
+          }
         }
         case 2 -> {
-          System.out.println("Enter name of grocery:");
-          String name = System.console().readLine();
-          foodStorage.removeGrocery(name);
-          System.out.println("Grocery removed from food storage");
+          try {
+            System.out.println("Enter name of grocery:");
+            String name = System.console().readLine();
+            foodStorage.removeGrocery(name);
+            System.out.println("Grocery removed from food storage");
+          } catch (Exception e) {
+            System.out.println("Invalid input");
+          }
         }
         case 3 -> {
-          System.out.println("Enter name of grocery:");
-          String name = System.console().readLine();
-          System.out.println("Enter amount to remove:");
-          double amount = Double.parseDouble(System.console().readLine());
-          foodStorage.removeGroceryAmount(name, amount);
-          System.out.println("Amount removed from grocery in food storage");
+          try {
+            System.out.println("Enter name of grocery:");
+            String name = System.console().readLine();
+            System.out.println("Enter amount to remove:");
+            double amount = Double.parseDouble(System.console().readLine());
+            foodStorage.removeGroceryAmount(name, amount);
+            System.out.println("Amount removed from grocery in food storage");
+          } catch (Exception e) {
+            System.out.println("Invalid input");
+          }
         }
         case 4 -> {
           foodStorage.getSortedGroceries().forEach(System.out::println);
@@ -75,9 +87,13 @@ public class FoodStorageView {
           foodStorage.getExpiredGroceries().forEach(System.out::println);
         }
         case 6 -> {
-          System.out.println("Enter date to check before(DD.MM.YYYY):");
-          String date = System.console().readLine();
-          foodStorage.getExpireBefore(date).forEach(System.out::println);
+          try {
+            System.out.println("Enter date to check before(DD.MM.YYYY):");
+            String date = System.console().readLine();
+            foodStorage.getExpireBefore(date).forEach(System.out::println);
+          } catch (Exception e) {
+            System.out.println("Invalid input");
+          }
         }
         default -> System.out.println("Invalid input");
       }
