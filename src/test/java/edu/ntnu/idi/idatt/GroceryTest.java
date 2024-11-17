@@ -63,6 +63,12 @@ class GroceryTest {
   }
 
   @Test
+  void testDateDoesNotMatchPattern() {
+    assertThrows(IllegalArgumentException.class,
+        () -> new Grocery("Apple", "kg", 1.0, 10.0, "19-02-2004"));
+  }
+
+  @Test
   void negativeAmount() {
     assertThrows(IllegalArgumentException.class,
         () -> new Grocery("Apple", "kg", -1.0, 10.0, "19.02.2004"));

@@ -39,6 +39,10 @@ public class Grocery {
     if (!siUnit.equals("kg") & !siUnit.equals("l")) {
       throw new IllegalArgumentException("SI unit must be kg or l");
     }
+    if (!expirationDate.matches("\\d{2}\\.\\d{2}\\.\\d{4}")) {
+      throw new IllegalArgumentException(
+          "Expiration date must be in the format DD.MM.YYYY and use periods (.) as separators");
+    }
     this.foodName = foodName;
     this.siUnit = siUnit;
     this.amount = amount;

@@ -53,7 +53,7 @@ public class FoodStorageView {
             String date = System.console().readLine();
 
             foodStorage.addGrocery(name, siUnit, amount, price, date);
-            System.out.println("Grocery added to food storage");
+            System.out.println("Grocery " + name + " added to food storage");
           } catch (Exception e) {
             System.out.println("Invalid input");
           }
@@ -63,7 +63,7 @@ public class FoodStorageView {
             System.out.println("Enter name of grocery:");
             String name = System.console().readLine();
             foodStorage.removeGrocery(name);
-            System.out.println("Grocery removed from food storage");
+            System.out.println("Grocery " + name + " removed from food storage");
           } catch (Exception e) {
             System.out.println("Invalid input");
           }
@@ -75,7 +75,9 @@ public class FoodStorageView {
             System.out.println("Enter amount to remove:");
             double amount = Double.parseDouble(System.console().readLine());
             foodStorage.removeGroceryAmount(name, amount);
-            System.out.println("Amount removed from grocery in food storage");
+            System.out.println(
+                "Removed " + amount + foodStorage.getGrocery(name).getUnit() + " of " + name
+                    + " from the food storage");
           } catch (Exception e) {
             System.out.println("Invalid input");
           }
