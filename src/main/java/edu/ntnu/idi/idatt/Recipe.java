@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class Recipe {
 
-  private ArrayList<Grocery> groceries;
+  private final ArrayList<Grocery> groceries;
   private String shortDescription;
   private String method;
   private int nrOfPortions;

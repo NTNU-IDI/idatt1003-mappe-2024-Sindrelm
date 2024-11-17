@@ -43,6 +43,15 @@ public class RecipeTest {
     assertEquals(recipe.getGroceries().size(), 1);
   }
 
+  @Test
+  void testAddGroceryThrowsException() {
+    Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
+    assertThrows(IllegalArgumentException.class, () -> recipe.addGrocery(null, "kg", 1.0, 1.0));
+    assertThrows(IllegalArgumentException.class, () -> recipe.addGrocery("apple", null, 1.0, 1.0));
+    assertThrows(IllegalArgumentException.class, () -> recipe.addGrocery("apple", "kg", -1.0, 1.0));
+    assertThrows(IllegalArgumentException.class, () -> recipe.addGrocery("apple", "kg", 1.0, -1.0));
+  }
+
   /**
    * Tests the checkFoodStorage method when the food storage contains the required groceries.
    */
