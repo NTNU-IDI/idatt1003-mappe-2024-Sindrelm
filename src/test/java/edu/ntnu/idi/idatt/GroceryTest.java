@@ -62,6 +62,18 @@ class GroceryTest {
         () -> new Grocery("Apple", "kg", 1.0, 10.0, null));
   }
 
+  @Test
+  void negativeAmount() {
+    assertThrows(IllegalArgumentException.class,
+        () -> new Grocery("Apple", "kg", -1.0, 10.0, "19.02.2004"));
+  }
+
+  @Test
+  void negativePrice() {
+    assertThrows(IllegalArgumentException.class,
+        () -> new Grocery("Apple", "kg", 1.0, -10.0, "19.02.2004"));
+  }
+
   /**
    * Tests the getFoodName method.
    */
@@ -141,4 +153,5 @@ class GroceryTest {
     String expected = "Apple, 1.0 kg, 10.0 kr, 19.02.2025";
     assertEquals(grocery.toString(), expected);
   }
+
 }

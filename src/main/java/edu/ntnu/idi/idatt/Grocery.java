@@ -30,6 +30,12 @@ public class Grocery {
     if (foodName == null || siUnit == null || expirationDate == null) {
       throw new IllegalArgumentException("Food name, SI unit and expiryDate must be non-null");
     }
+    if (amount < 0) {
+      throw new IllegalArgumentException("Amount must be a positive number");
+    }
+    if (price < 0) {
+      throw new IllegalArgumentException("Price must be a positive number");
+    }
     if (!siUnit.equals("kg") & !siUnit.equals("l")) {
       throw new IllegalArgumentException("SI unit must be kg or l");
     }

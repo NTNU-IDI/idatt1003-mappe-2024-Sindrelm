@@ -115,7 +115,7 @@ public class FoodStorage {
       }
       i++;
     }
-    throw new IllegalArgumentException("Grocery does not exist");
+    throw new IllegalArgumentException("Grocery not found in Food Storage");
   }
 
   /**
