@@ -95,7 +95,7 @@ public class Recipe {
     StringBuilder recipeInformation = new StringBuilder();
     recipeInformation.append("Recipe: ").append(shortDescription).append("\n");
     recipeInformation.append("Method: ").append(method).append("\n");
-    recipeInformation.append("Number of portions: ").append(nrOfPortions).append("\n");
+    recipeInformation.append("Number of portions: ").append(nrOfPortions).append("\n \n");
     recipeInformation.append("Groceries: \n");
     for (Grocery grocery : groceries) {
       recipeInformation.append(grocery.getFoodName()).append(", ");
@@ -103,6 +103,8 @@ public class Recipe {
       recipeInformation.append(grocery.getUnit()).append(", ");
       recipeInformation.append(grocery.getPrice()).append("kr \n");
     }
+    recipeInformation.append("\nTotal price: ");
+    recipeInformation.append(getRecipePrice()).append("kr \n");
     return recipeInformation.toString();
   }
 
