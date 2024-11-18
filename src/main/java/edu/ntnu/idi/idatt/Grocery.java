@@ -86,16 +86,19 @@ public class Grocery {
     return price * amount;
   }
 
+  /**
+   * Gets the expiration date of the food item.
+   *
+   * @return the expiration date of the food item
+   * @throws ParseException if the expiration date is not in the correct format
+   */
   public Date getExpirationDate() throws ParseException {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     return dateFormat.parse(this.expirationDate);
   }
 
-
   /**
    * Checks if the food item is still valid based on the current date.
-   * <p>
-   * MÅ ENDRES PÅ CATCH DELEN... NBNB
    *
    * @return false if the food item is still valid, true otherwise
    */
