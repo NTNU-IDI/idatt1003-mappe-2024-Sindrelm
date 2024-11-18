@@ -45,8 +45,8 @@ public class UserInterface {
    */
   public void start() throws ParseException {
     init();
-    boolean run = true;
-    while (run) {
+    boolean runUserInterface = true;
+    while (runUserInterface) {
       System.out.print("""
           What would you like to do?
           0: Close Program
@@ -55,7 +55,6 @@ public class UserInterface {
           """);
 
       int choice;
-
       try {
         choice = Integer.parseInt(System.console().readLine());
       } catch (NumberFormatException e) {
@@ -63,11 +62,16 @@ public class UserInterface {
         continue;
       }
       switch (choice) {
-        case 0 -> run = false;
+        case 0 -> {
+          System.out.println("Closing program ...");
+          runUserInterface = false;
+        }
         case 1 -> {
+          System.out.println("Opening CookBook ...");
           CookBookView.menu();
         }
         case 2 -> {
+          System.out.println("Opening FoodStorage ...");
           FoodStorageView.menu();
         }
         default -> {
