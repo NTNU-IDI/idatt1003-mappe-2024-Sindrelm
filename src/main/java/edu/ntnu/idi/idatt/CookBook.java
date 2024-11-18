@@ -55,6 +55,7 @@ public class CookBook {
    */
   public String getCookBookRegister() {
     StringBuilder cookBookRegister = new StringBuilder();
+    cookBookRegister.append("CookBook Register:\n");
     for (Recipe recipe : recipes) {
       cookBookRegister.append(recipe.getShortDescription()).append("\n");
     }
@@ -70,6 +71,8 @@ public class CookBook {
    */
   public String getRecipeSuggestions(FoodStorage foodStorage) {
     StringBuilder recipeSuggestions = new StringBuilder();
+    recipeSuggestions.append(
+        "Recipes you can make with current ingredients in the food storage:\n");
     int i = 0;
     while (i < recipes.size()) {
       if (recipes.get(i).checkFoodStorage(foodStorage)) {

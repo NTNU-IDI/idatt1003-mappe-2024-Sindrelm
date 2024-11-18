@@ -72,7 +72,6 @@ public class CookBookView {
           }
         }
         case 2 -> {
-          System.out.println("Recipes:");
           System.out.println(cookBook.getCookBookRegister());
         }
         case 3 -> {
@@ -85,7 +84,6 @@ public class CookBookView {
           }
         }
         case 4 -> {
-          System.out.println("Recipes you can make with current ingredients in the food storage:");
           System.out.println(cookBook.getRecipeSuggestions(foodStorage));
         }
       }
