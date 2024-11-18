@@ -169,4 +169,3 @@ public class FoodStorage {
     return groceries;
   }
 }
-
