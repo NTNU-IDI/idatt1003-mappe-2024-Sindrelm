@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class FoodStorage {
 
-  private ArrayList<Grocery> groceries;
+  private final ArrayList<Grocery> groceries;
 
   /**
    * Constructs a new FoodStorage with the specified list of groceries.
@@ -29,8 +29,8 @@ public class FoodStorage {
    * @return the grocery item with the specified food name
    */
   public Grocery getGrocery(String foodName) {
-    int i = getGroceryInd(foodName);
-    return groceries.get(i);
+    int groceryIndex = getGroceryIndex(foodName);
+    return groceries.get(groceryIndex);
   }
 
   /**
@@ -47,7 +47,7 @@ public class FoodStorage {
     if (!groceryExists(foodName)) {
       groceries.add(new Grocery(foodName, siUnit, amount, price, date));
     } else {
-      int groceryIndex = getGroceryInd(foodName);
+      int groceryIndex = getGroceryIndex(foodName);
       groceries.get(groceryIndex).addAmount(amount);
     }
   }
@@ -59,7 +59,7 @@ public class FoodStorage {
    * @throws IllegalArgumentException if the grocery item does not exist
    */
   public void removeGrocery(String foodName) {
-    int groceryIndex = getGroceryInd(foodName);
+    int groceryIndex = getGroceryIndex(foodName);
     groceries.remove(groceryIndex);
   }
 
@@ -110,7 +110,7 @@ public class FoodStorage {
    * @return the index of the grocery item
    * @throws IllegalArgumentException if the grocery item does not exist
    */
-  public int getGroceryInd(String foodName) {
+  public int getGroceryIndex(String foodName) {
     int i = 0;
     while (i < groceries.size()) {
       if (groceries.get(i).getFoodName().equals(foodName)) {

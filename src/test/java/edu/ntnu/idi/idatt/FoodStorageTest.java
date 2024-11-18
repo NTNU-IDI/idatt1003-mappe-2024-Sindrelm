@@ -41,7 +41,7 @@ public class FoodStorageTest {
   void testGetGroceryIndex() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
     foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    assertEquals(0, foodStorage.getGroceryInd("Apple"));
+    assertEquals(0, foodStorage.getGroceryIndex("Apple"));
   }
 
   /**
