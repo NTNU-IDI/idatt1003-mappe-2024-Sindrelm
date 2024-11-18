@@ -18,8 +18,7 @@ public class FoodStorageView {
     boolean runFoodStorageMenu = true;
     while (runFoodStorageMenu) {
       System.out.print("""
-          FRIDGE
-          What would you like to do?
+          FOOD STORAGE
           0: Close Food Storage
           1: Add Grocery to Food Storage
           2: Remove Grocery from Food Storage
@@ -38,22 +37,25 @@ public class FoodStorageView {
       }
 
       switch (choice) {
-        case 0 -> runFoodStorageMenu = false;
+        case 0 -> {
+          System.out.println("Closing Food Storage ...");
+          runFoodStorageMenu = false;
+        }
         case 1 -> {
           try {
             System.out.println("Enter name of grocery:");
             String name = System.console().readLine();
-            System.out.println("Enter SI unit of grocery:");
+            System.out.println("Enter SI unit of grocery (kg or l):");
             String siUnit = System.console().readLine();
             System.out.println("Enter amount of grocery:");
             double amount = Double.parseDouble(System.console().readLine());
-            System.out.println("Enter price of grocery:");
+            System.out.println("Enter price of grocery (per kg or per l):");
             double price = Double.parseDouble(System.console().readLine());
             System.out.println("Enter expiration date of grocery(DD.MM.YYYY):");
             String date = System.console().readLine();
 
             foodStorage.addGrocery(name, siUnit, amount, price, date);
-            System.out.println("Grocery " + name + " added to food storage");
+            System.out.println("Grocery " + name + " added to food storage\n");
           } catch (Exception e) {
             System.out.println("Invalid input");
           }
@@ -63,7 +65,7 @@ public class FoodStorageView {
             System.out.println("Enter name of grocery:");
             String name = System.console().readLine();
             foodStorage.removeGrocery(name);
-            System.out.println("Grocery " + name + " removed from food storage");
+            System.out.println("Grocery " + name + " removed from food storage\n");
           } catch (Exception e) {
             System.out.println("Invalid input");
           }
@@ -77,7 +79,7 @@ public class FoodStorageView {
             foodStorage.removeGroceryAmount(name, amount);
             System.out.println(
                 "Removed " + amount + foodStorage.getGrocery(name).getUnit() + " of " + name
-                    + " from the food storage");
+                    + " from the food storage\n");
           } catch (Exception e) {
             System.out.println("Invalid input");
           }

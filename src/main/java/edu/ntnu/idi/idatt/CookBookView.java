@@ -35,7 +35,10 @@ public class CookBookView {
       }
 
       switch (choice) {
-        case 0 -> runCookBook = false;
+        case 0 -> {
+          System.out.println("Closing CookBook ...");
+          runCookBook = false;
+        }
         case 1 -> {
           try {
             System.out.println("Enter name of recipe:");
