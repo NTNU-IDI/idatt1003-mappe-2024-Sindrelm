@@ -128,6 +128,6 @@ public class Grocery {
    * @return a string containing the food name, amount, SI unit, price, and expiration date
    */
   public String toString() {
-    return foodName + ", " + amount + " " + siUnit + ", " + price + " kr, " + expirationDate;
+    return foodName + ", " + amount + " " + siUnit + ", " + expirationDate;
   }
 }
