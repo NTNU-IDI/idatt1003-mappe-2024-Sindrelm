@@ -19,7 +19,6 @@ public class CookBookView {
     while (runCookBook) {
       System.out.print("""
           COOKBOOK
-          What would you like to do?
           0: Close CookBook
           1: Add Recipe to CookBook
           2: Show CookBook Register
@@ -60,13 +59,12 @@ public class CookBookView {
               double amount = Double.parseDouble(System.console().readLine());
               System.out.println("Enter the price per/kg for the " + i + ". ingredient:");
               double price = Double.parseDouble(System.console().readLine());
-
               recipe.addGrocery(foodName, siUnit, amount, price);
               i++;
             }
 
             cookBook.addRecipe(recipe);
-            System.out.println("Recipe " + recipe.getShortDescription() + ", added to cookbook");
+            System.out.println("Recipe " + recipe.getShortDescription() + ", added to cookbook\n");
           } catch (Exception e) {
             System.out.println("An error occurred while adding the recipe. Please try again.");
           }

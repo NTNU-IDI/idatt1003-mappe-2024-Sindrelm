@@ -48,7 +48,7 @@ public class UserInterface {
     boolean runUserInterface = true;
     while (runUserInterface) {
       System.out.print("""
-          What would you like to do?
+          MAIN MENU
           0: Close Program
           1: Open CookBook
           2: Open FoodStorage
