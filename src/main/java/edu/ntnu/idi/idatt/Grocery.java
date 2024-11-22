@@ -114,6 +114,25 @@ public class Grocery {
   }
 
   /**
+   * Checks if the food item expires before the specified date.
+   *
+   * @param date the date to compare with, in the format DD.MM.YYYY
+   * @return true if the food item expires before the specified date, false otherwise
+   */
+  public boolean expireBefore(String date) {
+    try {
+      Date currentDate = new Date();
+      Date expirationDate = getExpirationDate();
+      SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+      Date compareDate = dateFormat.parse(date);
+      return expirationDate.before(compareDate);
+    } catch (ParseException e) {
+      e.printStackTrace();
+      return false;
+    }
+  }
+
+  /**
    * Adds the specified amount to the current amount of the food item.
    *
    * @param amount the amount to be added to the current amount

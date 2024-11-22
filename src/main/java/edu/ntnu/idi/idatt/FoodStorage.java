@@ -141,16 +141,13 @@ public class FoodStorage {
    * @return a list of grocery items that expire before the specified date
    * @throws ParseException if the date is not in the correct format
    */
+
   public ArrayList<Grocery> getExpireBefore(String date) throws ParseException {
     ArrayList<Grocery> expireBefore = new ArrayList<Grocery>();
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    Date expireBeforeDate = dateFormat.parse(date);
-    int i = 0;
-    while (i < groceries.size()) {
-      if (expireBeforeDate.after(groceries.get(i).getExpirationDate())) {
-        expireBefore.add(groceries.get(i));
+    for (Grocery grocery : groceries) {
+      if (grocery.expireBefore(date)) {
+        expireBefore.add(grocery);
       }
-      i++;
     }
     return expireBefore;
   }
