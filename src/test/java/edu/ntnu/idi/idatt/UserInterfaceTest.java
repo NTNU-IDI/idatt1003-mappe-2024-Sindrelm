@@ -1,8 +1,6 @@
 package edu.ntnu.idi.idatt;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.text.ParseException;
+import edu.ntnu.idi.idatt.UI.UserInterface;
 import org.junit.jupiter.api.Test;
 
 public class UserInterfaceTest {

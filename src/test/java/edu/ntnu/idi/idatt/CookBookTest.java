@@ -2,6 +2,10 @@ package edu.ntnu.idi.idatt;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import edu.ntnu.idi.idatt.modules.CookBook;
+import edu.ntnu.idi.idatt.modules.FoodStorage;
+import edu.ntnu.idi.idatt.modules.Grocery;
+import edu.ntnu.idi.idatt.modules.Recipe;
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +28,7 @@ public class CookBookTest {
       cookBook.getRecipeIndex("Short description");
     } catch (IllegalArgumentException e) {
       // Assert
-      assertEquals("Recipe not found", e.getMessage());
+      assertEquals("Recipe not found in Cook Book", e.getMessage());
     }
   }
 
@@ -65,7 +69,8 @@ public class CookBookTest {
     String cookBookRegister = cookBook.getCookBookRegister();
 
     // Assert
-    assertEquals("Short description 1\nShort description 2\n", cookBookRegister);
+    assertEquals("CookBook Register:\nShort description 1\nShort description 2\n",
+        cookBookRegister);
   }
 
   /**
@@ -92,6 +97,8 @@ public class CookBookTest {
     String recipeSuggestions = cookBook.getRecipeSuggestions(foodStorage);
 
     // Assert
-    assertEquals("Short description 1\nShort description 2\n", recipeSuggestions);
+    assertEquals(
+        "Recipes you can make with current ingredients in the food storage:\nShort description 1\nShort description 2\n",
+        recipeSuggestions);
   }
 }

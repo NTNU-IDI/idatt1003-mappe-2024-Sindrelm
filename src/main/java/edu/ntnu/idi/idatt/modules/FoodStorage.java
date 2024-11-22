@@ -1,10 +1,8 @@
-package edu.ntnu.idi.idatt;
+package edu.ntnu.idi.idatt.modules;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
 
 /**
  * Represents a storage for grocery items.

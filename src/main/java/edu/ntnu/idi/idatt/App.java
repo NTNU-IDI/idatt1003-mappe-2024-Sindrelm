@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt;
 
+import edu.ntnu.idi.idatt.UI.UserInterface;
 import java.text.ParseException;
 
 /**

@@ -1,8 +1,9 @@
-package edu.ntnu.idi.idatt;
+package edu.ntnu.idi.idatt.UI;
 
-import static edu.ntnu.idi.idatt.UserInterface.cookBook;
-import static edu.ntnu.idi.idatt.UserInterface.foodStorage;
+import static edu.ntnu.idi.idatt.UI.UserInterface.cookBook;
+import static edu.ntnu.idi.idatt.UI.UserInterface.foodStorage;
 
+import edu.ntnu.idi.idatt.modules.Recipe;
 import java.util.ArrayList;
 
 /**

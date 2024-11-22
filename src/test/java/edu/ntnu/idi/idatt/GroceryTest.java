@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import edu.ntnu.idi.idatt.modules.Grocery;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
@@ -156,7 +157,7 @@ class GroceryTest {
   @Test
   void testToString() {
     Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2025");
-    String expected = "Apple, 1.0 kg, 10.0 kr, 19.02.2025";
+    String expected = "Apple, 1.0 kg, 19.02.2025";
     assertEquals(grocery.toString(), expected);
   }
 

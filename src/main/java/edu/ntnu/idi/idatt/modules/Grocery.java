@@ -1,8 +1,8 @@
-package edu.ntnu.idi.idatt;
+package edu.ntnu.idi.idatt.modules;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.text.ParseException;
 
 /**
  * Represents a grocery item with its details.
@@ -12,9 +12,9 @@ public class Grocery {
   // Variables
   private final String foodName;
   private final String siUnit;
-  private Double amount;
   private final Double price;
   private final String expirationDate;
+  private Double amount;
 
   /**
    * Constructs a new Grocery item.

@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt;
+package edu.ntnu.idi.idatt.modules;
 
 import java.util.ArrayList;
 
@@ -54,12 +54,30 @@ public class Recipe {
   }
 
   /**
+   * Updates the short description of the recipe.
+   *
+   * @param shortDescription the new short description
+   */
+  public void setShortDescription(String shortDescription) {
+    this.shortDescription = shortDescription;
+  }
+
+  /**
    * Gets the method or instructions to prepare the recipe.
    *
    * @return the method
    */
   public String getMethod() {
     return method;
+  }
+
+  /**
+   * Updates the method or instructions to prepare the recipe.
+   *
+   * @param method the new method
+   */
+  public void setMethod(String method) {
+    this.method = method;
   }
 
   /**
@@ -114,24 +132,6 @@ public class Recipe {
    */
   public void addGrocery(String foodName, String siUnit, double amount, double price) {
     groceries.add(new Grocery(foodName, siUnit, amount, price, "00.00.0000"));
-  }
-
-  /**
-   * Updates the short description of the recipe.
-   *
-   * @param shortDescription the new short description
-   */
-  public void setShortDescription(String shortDescription) {
-    this.shortDescription = shortDescription;
-  }
-
-  /**
-   * Updates the method or instructions to prepare the recipe.
-   *
-   * @param method the new method
-   */
-  public void setMethod(String method) {
-    this.method = method;
   }
 
   /**

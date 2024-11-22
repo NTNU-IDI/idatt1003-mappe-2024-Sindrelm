@@ -1,5 +1,9 @@
-package edu.ntnu.idi.idatt;
+package edu.ntnu.idi.idatt.UI;
 
+import edu.ntnu.idi.idatt.modules.CookBook;
+import edu.ntnu.idi.idatt.modules.FoodStorage;
+import edu.ntnu.idi.idatt.modules.Grocery;
+import edu.ntnu.idi.idatt.modules.Recipe;
 import java.text.ParseException;
 import java.util.ArrayList;
 
