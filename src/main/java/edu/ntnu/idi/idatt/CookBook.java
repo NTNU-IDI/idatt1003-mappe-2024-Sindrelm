@@ -73,12 +73,10 @@ public class CookBook {
     StringBuilder recipeSuggestions = new StringBuilder();
     recipeSuggestions.append(
         "Recipes you can make with current ingredients in the food storage:\n");
-    int i = 0;
-    while (i < recipes.size()) {
-      if (recipes.get(i).checkFoodStorage(foodStorage)) {
-        recipeSuggestions.append(recipes.get(i).getShortDescription()).append("\n");
+    for (Recipe recipe : recipes) {
+      if (recipe.checkFoodStorage(foodStorage)) {
+        recipeSuggestions.append(recipe.getShortDescription()).append("\n");
       }
-      i++;
     }
     return recipeSuggestions.toString();
   }
