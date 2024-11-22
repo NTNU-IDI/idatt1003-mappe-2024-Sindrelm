@@ -93,12 +93,10 @@ public class FoodStorage {
    * @return true if the grocery item exists, false otherwise
    */
   public boolean groceryExists(String foodName) {
-    int i = 0;
-    while (i < groceries.size()) {
-      if (groceries.get(i).getFoodName().equals(foodName)) {
+    for (Grocery grocery : groceries) {
+      if (grocery.getFoodName().equals(foodName)) {
         return true;
       }
-      i++;
     }
     return false;
   }
