@@ -77,13 +77,9 @@ public class Recipe {
    * @return the total price of the recipe
    */
   public double getRecipePrice() {
-    double recipePrice = 0;
-    int i = 0;
-    while (i < groceries.size()) {
-      recipePrice += groceries.get(i).getPrice() * groceries.get(i).getAmount();
-      i++;
-    }
-    return recipePrice;
+    return groceries.stream()
+        .mapToDouble(grocery -> grocery.getPrice() * grocery.getAmount())
+        .sum();
   }
 
   /**
