@@ -93,9 +93,9 @@ public class RecipeTest {
    * Tests the addShortDescription method.
    */
   @Test
-  void testAddShortDescription() {
+  void testSetShortDescription() {
     Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
-    recipe.addShortDescription("newShortDescription");
+    recipe.setShortDescription("newShortDescription");
     assertEquals(recipe.getShortDescription(), "newShortDescription");
   }
 
@@ -105,7 +105,7 @@ public class RecipeTest {
   @Test
   void testAddMethod() {
     Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
-    recipe.addMethod("newMethod");
+    recipe.setMethod("newMethod");
     assertEquals(recipe.getMethod(), "newMethod");
   }
 
@@ -113,9 +113,9 @@ public class RecipeTest {
    * Tests the addNumberOfPortions method.
    */
   @Test
-  void testAddNumberOfPortions() {
+  void testSetNumberOfPortions() {
     Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
-    recipe.addNumberOfPortions(2);
+    recipe.setNumberOfPortions(2);
     assertEquals(recipe.getNrOfPortions(), 2);
   }
 }

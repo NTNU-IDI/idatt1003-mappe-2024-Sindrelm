@@ -121,7 +121,7 @@ public class Recipe {
    *
    * @param shortDescription the new short description
    */
-  public void addShortDescription(String shortDescription) {
+  public void setShortDescription(String shortDescription) {
     this.shortDescription = shortDescription;
   }
 
@@ -130,7 +130,7 @@ public class Recipe {
    *
    * @param method the new method
    */
-  public void addMethod(String method) {
+  public void setMethod(String method) {
     this.method = method;
   }
 
@@ -139,7 +139,7 @@ public class Recipe {
    *
    * @param nrOfPortions the new number of portions
    */
-  public void addNumberOfPortions(int nrOfPortions) {
+  public void setNumberOfPortions(int nrOfPortions) {
     this.nrOfPortions = nrOfPortions;
   }
 
@@ -150,17 +150,13 @@ public class Recipe {
    * @return true if all required groceries are available in sufficient amounts, false otherwise
    */
   public boolean checkFoodStorage(FoodStorage foodStorage) {
-    int i = 0;
-    while (i < groceries.size()) {
+    for (Grocery grocery : groceries) {
       try {
-        double recipeAmount = groceries.get(i).getAmount();
-        double foodStorageAmount = foodStorage.getGrocery(groceries.get(i).getFoodName())
-            .getAmount();
+        double recipeAmount = grocery.getAmount();
+        double foodStorageAmount = foodStorage.getGrocery(grocery.getFoodName()).getAmount();
         double amountDifference = foodStorageAmount - recipeAmount;
         if (amountDifference < 0) {
           return false;
-        } else if (amountDifference >= 0) {
-          i++;
         }
       } catch (IllegalArgumentException e) {
         return false;
