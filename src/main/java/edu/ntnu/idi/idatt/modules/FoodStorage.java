@@ -43,7 +43,7 @@ public class FoodStorage {
    */
   public void addGrocery(String foodName, String siUnit, double amount, double price, String date) {
     if (!groceryExists(foodName)) {
-      groceries.add(new Grocery(foodName, siUnit, amount, price, date));
+      groceries.add(new Grocery(foodName, siUnit, amount, price, date)); // expirationDate
     } else {
       int groceryIndex = getGroceryIndex(foodName);
       groceries.get(groceryIndex).addAmount(amount);
@@ -71,16 +71,18 @@ public class FoodStorage {
    */
   public void removeGroceryAmount(String foodName, double amount) {
     if (amount < 0) {
-      throw new IllegalArgumentException("Amount to remove must be positive");
+      throw new IllegalArgumentException(
+          "Amount to remove must be positive");  // TODO Her kunne du hatt en metode for å legge til og fjerne der negative tall blir fjerning. ExceptionHandling kunne også vært inne i Ingredient
     }
     if (groceryExists(foodName)) {
       Grocery grocery = getGrocery(foodName);
       grocery.addAmount(-amount);
-      if (grocery.getAmount() <= 0) {
+      if (grocery.getAmount() <= 0) { // TODO Questionable å la den bli negativ
         removeGrocery(foodName);
       }
     } else {
-      throw new IllegalArgumentException("Grocery does not exist");
+      throw new IllegalArgumentException(
+          "Grocery does not exist"); //TODO Kaster ikke groceryExist allerede?
     }
   }
 
@@ -90,7 +92,7 @@ public class FoodStorage {
    * @param foodName the name of the food item to check
    * @return true if the grocery item exists, false otherwise
    */
-  public boolean groceryExists(String foodName) {
+  public boolean groceryExists(String foodName) { //TODO Kan bruke getGroceryIndex her
     for (Grocery grocery : groceries) {
       if (grocery.getFoodName().equals(foodName)) {
         return true;
@@ -110,7 +112,7 @@ public class FoodStorage {
     int i = 0;
     while (i < groceries.size()) {
       if (groceries.get(i).getFoodName().equals(foodName)) {
-        return i;
+        return i; // TODO Trekk for å avbryte en while-løkke
       }
       i++;
     }
@@ -123,7 +125,7 @@ public class FoodStorage {
    * @return a list of grocery items that have expired
    */
   public ArrayList<Grocery> getExpiredGroceries() {
-    ArrayList<Grocery> expiredGroceries = new ArrayList<Grocery>();
+    ArrayList<Grocery> expiredGroceries = new ArrayList<Grocery>(); // TODO Kan bruke stream her
     for (Grocery grocery : groceries) {
       if (grocery.isExpired()) {
         expiredGroceries.add(grocery);
@@ -141,7 +143,7 @@ public class FoodStorage {
    */
 
   public ArrayList<Grocery> getExpireBefore(String date) throws ParseException {
-    ArrayList<Grocery> expireBefore = new ArrayList<Grocery>();
+    ArrayList<Grocery> expireBefore = new ArrayList<Grocery>(); // TODO Kan bruke stream her
     for (Grocery grocery : groceries) {
       if (grocery.expireBefore(date)) {
         expireBefore.add(grocery);
@@ -155,8 +157,9 @@ public class FoodStorage {
    *
    * @return the sorted list of grocery items
    */
-  public ArrayList<Grocery> getSortedGroceries() {
-    groceries.sort(Comparator.comparing(Grocery::getFoodName));
+  public ArrayList<Grocery> getSortedGroceries() { // TODO bedre navn, sortert hvordan?
+    groceries.sort(Comparator.comparing(
+        Grocery::getFoodName)); // TODO Kan bruke stream her, copilot, vet ikke om du faktiskn kan
     return groceries;
   }
 }

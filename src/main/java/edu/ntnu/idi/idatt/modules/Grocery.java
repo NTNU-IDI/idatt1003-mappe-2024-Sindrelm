@@ -11,8 +11,8 @@ public class Grocery {
 
   // Variables
   private final String foodName;
-  private final String siUnit;
-  private final Double price;
+  private final String siUnit; // bare Unit, og ha med en til ting
+  private final Double price;  // potensielt questionable om dette skal være final og expirationDate
   private final String expirationDate;
   private Double amount;
 
@@ -27,7 +27,8 @@ public class Grocery {
    */
   public Grocery(String foodName, String siUnit, double amount, double price,
       String expirationDate) {
-    if (foodName == null || siUnit == null || expirationDate == null) {
+    if (foodName == null || siUnit == null
+        || expirationDate == null) { // TODO exceptionhandling for blank strings
       throw new IllegalArgumentException("Food name, SI unit and expiryDate must be non-null");
     }
     if (amount < 0) {
@@ -37,7 +38,8 @@ public class Grocery {
       throw new IllegalArgumentException("Price must be a positive number");
     }
     if (!siUnit.equals("kg") & !siUnit.equals("l")) {
-      throw new IllegalArgumentException("SI unit must be kg or l");
+      throw new IllegalArgumentException(
+          "SI unit must be kg or l"); // potensielt endre til enum eller set og kanskje ha med pieces eller noe sånt
     }
     if (!expirationDate.matches("\\d{2}\\.\\d{2}\\.\\d{4}")) {
       throw new IllegalArgumentException(
@@ -84,7 +86,7 @@ public class Grocery {
    */
   public double getPrice() {
     return price * amount;
-  }
+  } // TODO Dette er totalpris, ikke pris per unit.
 
   /**
    * Gets the expiration date of the food item.
@@ -92,9 +94,9 @@ public class Grocery {
    * @return the expiration date of the food item
    * @throws ParseException if the expiration date is not in the correct format
    */
-  public Date getExpirationDate() throws ParseException {
+  public Date getExpirationDate() throws ParseException { // hva er throwgreia her?
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    return dateFormat.parse(this.expirationDate);
+    return dateFormat.parse(this.expirationDate); // LocalDate on top
   }
 
   /**
@@ -108,10 +110,11 @@ public class Grocery {
       Date expirationDate = getExpirationDate();
       return currentDate.after(expirationDate);
     } catch (ParseException e) {
-      e.printStackTrace();
+      e.printStackTrace(); // hva er dette?
       return false;
     }
   }
+  // TODO Legge til metoder for exceptionHandling der det gjøres mer enn en gang. (private metode)
 
   /**
    * Checks if the food item expires before the specified date.
@@ -127,7 +130,7 @@ public class Grocery {
       Date compareDate = dateFormat.parse(date);
       return expirationDate.before(compareDate);
     } catch (ParseException e) {
-      e.printStackTrace();
+      e.printStackTrace(); // hva er dette?
       return false;
     }
   }
@@ -139,7 +142,8 @@ public class Grocery {
    */
   public void addAmount(double amount) {
     this.amount += amount;
-  }
+  } // TODO Legge til exceptionHandling for negative tall eller for at det ikke blir mindre enn 0 hvis du bruker denne til å fjerne mengde også
+
 
   /**
    * Returns a string representation of the grocery item.
@@ -147,6 +151,6 @@ public class Grocery {
    * @return a string containing the food name, amount, SI unit, price, and expiration date
    */
   public String toString() {
-    return foodName + ", " + amount + " " + siUnit + ", " + expirationDate;
+    return foodName + ", " + amount + " " + siUnit + ", " + expirationDate; // TODO Legge til pris
   }
 }
