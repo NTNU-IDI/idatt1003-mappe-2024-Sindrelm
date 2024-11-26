@@ -84,10 +84,10 @@ public class FoodStorage {
    * @param foodName the name of the food item to check
    * @return true if the grocery item exists, false otherwise
    */
-  public boolean groceryExists(String foodName) { //TODO Kan bruke getGroceryIndex her
+  public boolean groceryExists(String foodName) { //TODO Kan bruke getGroceryIndex her kanskje??
     for (Grocery grocery : groceries) {
-      if (grocery.getFoodName().equals(foodName)) {
-        return true;      //TODO, dårlig praksis å avbryte i for løkke?
+      if (foodName.equals(grocery.getFoodName())) {
+        return true;
       }
     }
     return false;
