@@ -130,13 +130,9 @@ public class FoodStorage {
    */
 
   public ArrayList<Grocery> getExpireBefore(String date) throws ParseException {
-    ArrayList<Grocery> expireBefore = new ArrayList<Grocery>(); // TODO Kan bruke stream her
-    for (Grocery grocery : groceries) {
-      if (grocery.expireBefore(date)) {
-        expireBefore.add(grocery);
-      }
-    }
-    return expireBefore;
+    return groceries.stream()
+        .filter(grocery -> grocery.expireBefore(date))
+        .collect(Collectors.toCollection(ArrayList::new));
   }
 
   /**
