@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 /**
  * Represents a storage for grocery items.
@@ -115,13 +116,9 @@ public class FoodStorage {
    * @return a list of grocery items that have expired
    */
   public ArrayList<Grocery> getExpiredGroceries() {
-    ArrayList<Grocery> expiredGroceries = new ArrayList<Grocery>(); // TODO Kan bruke stream her
-    for (Grocery grocery : groceries) {
-      if (grocery.isExpired()) {
-        expiredGroceries.add(grocery);
-      }
-    }
-    return expiredGroceries;
+    return groceries.stream()
+        .filter(Grocery::isExpired)
+        .collect(Collectors.toCollection(ArrayList::new));
   }
 
   /**
