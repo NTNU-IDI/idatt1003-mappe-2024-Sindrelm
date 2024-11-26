@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.modules;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 
 /**
  * Represents a storage for grocery items.
@@ -70,19 +71,10 @@ public class FoodStorage {
    * @throws IllegalArgumentException if the grocery item does not exist
    */
   public void removeGroceryAmount(String foodName, double amount) {
-    if (amount < 0) {
-      throw new IllegalArgumentException(
-          "Amount to remove must be positive");  // TODO Her kunne du hatt en metode for å legge til og fjerne der negative tall blir fjerning. ExceptionHandling kunne også vært inne i Ingredient
-    }
-    if (groceryExists(foodName)) {
-      Grocery grocery = getGrocery(foodName);
-      grocery.addAmount(-amount);
-      if (grocery.getAmount() <= 0) { // TODO Questionable å la den bli negativ
-        removeGrocery(foodName);
-      }
-    } else {
-      throw new IllegalArgumentException(
-          "Grocery does not exist"); //TODO Kaster ikke groceryExist allerede?
+    Grocery grocery = getGrocery(foodName);
+    grocery.removeAmount(amount);
+    if (grocery.getAmount() <= 0) { // TODO Questionable å la den bli negativ
+      removeGrocery(foodName);
     }
   }
 
@@ -109,14 +101,12 @@ public class FoodStorage {
    * @throws IllegalArgumentException if the grocery item does not exist
    */
   public int getGroceryIndex(String foodName) {
-    int i = 0;
-    while (i < groceries.size()) {
-      if (groceries.get(i).getFoodName().equals(foodName)) {
-        return i; // TODO Trekk for å avbryte en while-løkke
+    for (int groceryIndex = 0; groceryIndex < groceries.size(); groceryIndex++) {
+      if (groceries.get(groceryIndex).getFoodName().equals(foodName)) {
+        return groceryIndex;
       }
-      i++;
     }
-    throw new IllegalArgumentException("Grocery not found in Food Storage");
+    throw new NoSuchElementException("Grocery does not exist");
   }
 
   /**

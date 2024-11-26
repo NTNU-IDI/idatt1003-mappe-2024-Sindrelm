@@ -86,7 +86,7 @@ public class Grocery {
    */
   public double getPrice() {
     return price * amount;
-  } // TODO Dette er totalpris, ikke pris per unit.
+  }
 
   /**
    * Gets the expiration date of the food item.
@@ -144,6 +144,17 @@ public class Grocery {
     this.amount += amount;
   } // TODO Legge til exceptionHandling for negative tall eller for at det ikke blir mindre enn 0 hvis du bruker denne til å fjerne mengde også
 
+  /**
+   * Removes the specified amount to the current amount of the food item.
+   *
+   * @param amount the amount to be Removed from the current amount
+   */
+  public void removeAmount(double amount) {
+    if (amount <= 0) {
+      throw new IllegalArgumentException("Amount to remove must be positive");
+    }
+    this.amount -= amount;
+  }
 
   /**
    * Returns a string representation of the grocery item.

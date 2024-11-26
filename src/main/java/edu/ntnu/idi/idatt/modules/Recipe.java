@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt.modules;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 /**
  * Represents a recipe with a list of groceries, a short description, a method, and the number of
@@ -158,7 +159,7 @@ public class Recipe {
         if (amountDifference < 0) {
           return false;
         }
-      } catch (IllegalArgumentException e) {
+      } catch (NoSuchElementException e) {
         return false;
       }
     }

@@ -9,6 +9,7 @@ import edu.ntnu.idi.idatt.modules.FoodStorage;
 import edu.ntnu.idi.idatt.modules.Grocery;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -85,7 +86,7 @@ public class FoodStorageTest {
   void testRemoveGroceryAmountNotExists() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
     foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    assertThrows(IllegalArgumentException.class,
+    assertThrows(NoSuchElementException.class,
         () -> foodStorage.removeGroceryAmount("Banana", 1.0));
   }
 
@@ -106,7 +107,8 @@ public class FoodStorageTest {
   @Test
   void testRemoveGroceryNotExists() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    assertThrows(IllegalArgumentException.class,
+    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
+    assertThrows(NoSuchElementException.class,
         () -> foodStorage.removeGrocery("Banana"));
   }
 
