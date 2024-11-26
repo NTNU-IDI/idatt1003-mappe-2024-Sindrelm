@@ -141,8 +141,11 @@ public class Grocery {
    * @param amount the amount to be added to the current amount
    */
   public void addAmount(double amount) {
+    if (amount <= 0) {
+      throw new IllegalArgumentException("Amount to add must be positive");
+    }
     this.amount += amount;
-  } // TODO Legge til exceptionHandling for negative tall eller for at det ikke blir mindre enn 0 hvis du bruker denne til å fjerne mengde også
+  }
 
   /**
    * Removes the specified amount to the current amount of the food item.
@@ -162,6 +165,7 @@ public class Grocery {
    * @return a string containing the food name, amount, SI unit, price, and expiration date
    */
   public String toString() {
-    return foodName + ", " + amount + " " + siUnit + ", " + expirationDate; // TODO Legge til pris
+    return foodName + ", " + amount + " " + siUnit + ", "
+        + expirationDate; // TODO Legge til pris(mener at det var en grunn til at jeg fjernet dette, se an.
   }
 }
