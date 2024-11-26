@@ -147,9 +147,9 @@ public class FoodStorage {
    *
    * @return the sorted list of grocery items
    */
-  public ArrayList<Grocery> getSortedGroceries() { // TODO bedre navn, sortert hvordan?
+  public ArrayList<Grocery> getAlphabeticallySortedGroceries() {
     groceries.sort(Comparator.comparing(
-        Grocery::getFoodName)); // TODO Kan bruke stream her, copilot, vet ikke om du faktiskn kan
+        Grocery::getFoodName)); // TODO Kan bruke stream her??
     return groceries;
   }
 }

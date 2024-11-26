@@ -85,7 +85,7 @@ public class FoodStorageView {
           }
         }
         case 4 -> {
-          foodStorage.getSortedGroceries().forEach(System.out::println);
+          foodStorage.getAlphabeticallySortedGroceries().forEach(System.out::println);
         }
         case 5 -> {
           foodStorage.getExpiredGroceries().forEach(System.out::println);
