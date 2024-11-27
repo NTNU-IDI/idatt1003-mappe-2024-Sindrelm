@@ -12,7 +12,7 @@ public class Grocery {
 
   // Variables
   private final String foodName;
-  private final String siUnit; // bare Unit, og ha med en til ting
+  private final String unit; // bare Unit, og ha med en til ting
   private final double price;  // potensielt questionable om dette skal være final og expirationDate
   private final LocalDate expirationDate;
   private double amount;
@@ -21,14 +21,14 @@ public class Grocery {
    * Constructs a new Grocery item.
    *
    * @param foodName       the name of the food item
-   * @param siUnit         the SI unit of the food item (kg or l)
+   * @param unit           the SI unit of the food item (kg or l)
    * @param amount         the amount of the food item
    * @param price          the price of the food item in kr/kg or kr/l
    * @param expirationDate the expiration expiryDate of the food item
    */
-  public Grocery(String foodName, String siUnit, double amount, double price,
+  public Grocery(String foodName, String unit, double amount, double price,
       String expirationDate) {
-    if (foodName == null || siUnit == null
+    if (foodName == null || unit == null
         || expirationDate == null) { // TODO exceptionhandling for blank strings
       throw new IllegalArgumentException("Food name, SI unit and expiryDate must be non-null");
     }
@@ -38,7 +38,7 @@ public class Grocery {
     if (price < 0) {
       throw new IllegalArgumentException("Price must be a positive number");
     }
-    if (!siUnit.equals("kg") & !siUnit.equals("l")) {
+    if (!unit.equals("kg") & !unit.equals("l")) {
       throw new IllegalArgumentException(
           "SI unit must be kg or l"); // potensielt endre til enum eller set og kanskje ha med pieces eller noe sånt
     }
@@ -55,7 +55,7 @@ public class Grocery {
     }
 
     this.foodName = foodName;
-    this.siUnit = siUnit;
+    this.unit = unit;
     this.amount = amount;
     this.price = price;
   }
@@ -75,7 +75,7 @@ public class Grocery {
    * @return the SI unit of the food item
    */
   public String getUnit() {
-    return siUnit;
+    return unit;
   }
 
   /**
@@ -164,6 +164,6 @@ public class Grocery {
    */
   public String toString() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-    return foodName + ", " + amount + " " + siUnit + ", " + expirationDate.format(formatter);
+    return foodName + ", " + amount + " " + unit + ", " + expirationDate.format(formatter);
   }
 }
