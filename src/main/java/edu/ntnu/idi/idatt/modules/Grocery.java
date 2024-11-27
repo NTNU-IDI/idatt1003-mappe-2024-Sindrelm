@@ -42,10 +42,6 @@ public class Grocery {
       throw new IllegalArgumentException(
           "SI unit must be kg or l"); // potensielt endre til enum eller set og kanskje ha med pieces eller noe sånt
     }
-    if (!expirationDate.matches("\\d{2}\\.\\d{2}\\.\\d{4}")) {
-      throw new IllegalArgumentException(
-          "Expiration date must be in the format DD.MM.YYYY and use periods (.) as separators");
-    }
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     try {
