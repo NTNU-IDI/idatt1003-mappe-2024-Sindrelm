@@ -6,9 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import edu.ntnu.idi.idatt.modules.Grocery;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.text.ParseException;
 
 import org.junit.jupiter.api.Test;
@@ -22,9 +20,9 @@ class GroceryTest {
    * Tests the getPrice method.
    */
   @Test
-  void getPrice() {
+  void getTotalPrice() {
     Grocery grocery = new Grocery("Apple", "kg", 2.0, 10.0, "19.02.2004");
-    double price = grocery.getPrice();
+    double price = grocery.getTotalPrice();
     assertEquals(price, 20.0);
   }
 

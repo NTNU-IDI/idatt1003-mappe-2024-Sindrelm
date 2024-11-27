@@ -87,7 +87,7 @@ public class Grocery {
    *
    * @return the price of the food item
    */
-  public double getPrice() {
+  public double getTotalPrice() {
     return price * amount;
   }
 

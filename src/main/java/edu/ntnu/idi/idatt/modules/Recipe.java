@@ -97,7 +97,7 @@ public class Recipe {
    */
   public double getRecipePrice() {
     return groceries.stream()
-        .mapToDouble(grocery -> grocery.getPrice() * grocery.getAmount())
+        .mapToDouble(grocery -> grocery.getTotalPrice() * grocery.getAmount())
         .sum();
   }
 
@@ -116,7 +116,7 @@ public class Recipe {
       recipeInformation.append(grocery.getFoodName()).append(", ");
       recipeInformation.append(grocery.getAmount());
       recipeInformation.append(grocery.getUnit()).append(", ");
-      recipeInformation.append(grocery.getPrice()).append("kr \n");
+      recipeInformation.append(grocery.getTotalPrice()).append("kr \n");
     }
     recipeInformation.append("\nTotal price: ");
     recipeInformation.append(getRecipePrice()).append("kr \n");
