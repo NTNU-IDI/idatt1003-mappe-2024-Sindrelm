@@ -103,7 +103,7 @@ public class Grocery {
   /**
    * Checks if the food item is still valid based on the current date.
    *
-   * @return false if the food item is still valid, true otherwise
+   * @return true if the food item is expired, false otherwise
    */
   public boolean isExpired() {
     return LocalDate.now().isAfter(this.expirationDate);
