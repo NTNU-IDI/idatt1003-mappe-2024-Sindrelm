@@ -38,7 +38,7 @@ public class Grocery {
     if (price < 0) {
       throw new IllegalArgumentException("Price must be a positive number");
     }
-    if (!unit.equals("kg") & !unit.equals("l")) {
+    if (!unit.equals("kg") && !unit.equals("l")) {
       throw new IllegalArgumentException(
           "SI unit must be kg or l"); // potensielt endre til enum eller set og kanskje ha med pieces eller noe sånt
     }
