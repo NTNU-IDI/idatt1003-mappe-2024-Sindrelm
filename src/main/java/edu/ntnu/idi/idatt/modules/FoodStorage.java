@@ -74,7 +74,7 @@ public class FoodStorage {
   public void removeGroceryAmount(String foodName, double amount) {
     Grocery grocery = getGrocery(foodName);
     grocery.removeAmount(amount);
-    if (grocery.getAmount() <= 0) { // TODO Questionable å la den bli negativ
+    if (grocery.getAmount() == 0) { // TODO Questionable å la den bli negativ
       removeGrocery(foodName);
     }
   }

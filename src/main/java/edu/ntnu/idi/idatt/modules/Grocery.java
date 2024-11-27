@@ -148,6 +148,9 @@ public class Grocery {
     if (amount <= 0) {
       throw new IllegalArgumentException("Amount to remove must be positive");
     }
+    if (amount - this.amount > 0) {
+      throw new IllegalArgumentException("Amount to remove exceeds current amount");
+    }
     this.amount -= amount;
   }
 
