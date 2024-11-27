@@ -42,8 +42,8 @@ public class Grocery {
           "SI unit must be kg or l"); // potensielt endre til enum eller set og kanskje ha med pieces eller noe sånt
     }
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     try {
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
       this.expirationDate = LocalDate.parse(expirationDate, formatter);
     } catch (DateTimeParseException e) {
       throw new IllegalArgumentException("Expiration date must be in the format DD.MM.YYYY", e);
