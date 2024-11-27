@@ -1,6 +1,5 @@
 package edu.ntnu.idi.idatt.modules;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -96,10 +95,9 @@ public class Grocery {
    * Gets the expiration date of the food item.
    *
    * @return the expiration date of the food item
-   * @throws ParseException if the expiration date is not in the correct format
    */
-  public LocalDate getExpirationDate() throws ParseException { // hva er throwgreia her?
-    return this.expirationDate; // LocalDate on top
+  public LocalDate getExpirationDate() {
+    return this.expirationDate;
   }
 
   /**
