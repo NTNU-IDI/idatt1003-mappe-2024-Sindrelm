@@ -132,7 +132,7 @@ public class Recipe {
    * @param price    the price of the food item
    */
   public void addGrocery(String foodName, String siUnit, double amount, double price) {
-    groceries.add(new Grocery(foodName, siUnit, amount, price, "00.00.0000"));
+    groceries.add(new Grocery(foodName, siUnit, amount, price, "11.11.1111"));
   }
 
   /**

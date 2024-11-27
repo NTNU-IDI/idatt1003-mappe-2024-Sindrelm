@@ -1,8 +1,9 @@
 package edu.ntnu.idi.idatt.modules;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a grocery item with its details.
@@ -13,7 +14,7 @@ public class Grocery {
   private final String foodName;
   private final String siUnit; // bare Unit, og ha med en til ting
   private final Double price;  // potensielt questionable om dette skal være final og expirationDate
-  private final String expirationDate;
+  private final LocalDate expirationDate;
   private Double amount;
 
   /**
@@ -45,10 +46,17 @@ public class Grocery {
       throw new IllegalArgumentException(
           "Expiration date must be in the format DD.MM.YYYY and use periods (.) as separators");
     }
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    try {
+      this.expirationDate = LocalDate.parse(expirationDate, formatter);
+    } catch (DateTimeParseException e) {
+      throw new IllegalArgumentException("Expiration date must be in the format DD.MM.YYYY", e);
+    }
+
     this.foodName = foodName;
     this.siUnit = siUnit;
     this.amount = amount;
-    this.expirationDate = expirationDate;
     this.price = price;
   }
 
@@ -94,9 +102,8 @@ public class Grocery {
    * @return the expiration date of the food item
    * @throws ParseException if the expiration date is not in the correct format
    */
-  public Date getExpirationDate() throws ParseException { // hva er throwgreia her?
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    return dateFormat.parse(this.expirationDate); // LocalDate on top
+  public LocalDate getExpirationDate() throws ParseException { // hva er throwgreia her?
+    return this.expirationDate; // LocalDate on top
   }
 
   /**
@@ -105,14 +112,7 @@ public class Grocery {
    * @return false if the food item is still valid, true otherwise
    */
   public boolean isExpired() {
-    try {
-      Date currentDate = new Date();
-      Date expirationDate = getExpirationDate();
-      return currentDate.after(expirationDate);
-    } catch (ParseException e) {
-      e.printStackTrace(); // hva er dette?
-      return false;
-    }
+    return LocalDate.now().isAfter(this.expirationDate);
   }
   // TODO Legge til metoder for exceptionHandling der det gjøres mer enn en gang. (private metode)
 
@@ -123,16 +123,14 @@ public class Grocery {
    * @return true if the food item expires before the specified date, false otherwise
    */
   public boolean expireBefore(String date) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    LocalDate compareDate;
     try {
-      Date currentDate = new Date();
-      Date expirationDate = getExpirationDate();
-      SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-      Date compareDate = dateFormat.parse(date);
-      return expirationDate.before(compareDate);
-    } catch (ParseException e) {
-      e.printStackTrace(); // hva er dette?
-      return false;
+      compareDate = LocalDate.parse(date, formatter);
+    } catch (DateTimeParseException e) {
+      throw new IllegalArgumentException("Date must be in the format DD.MM.YYYY", e);
     }
+    return this.expirationDate.isBefore(compareDate);
   }
 
   /**
@@ -165,7 +163,7 @@ public class Grocery {
    * @return a string containing the food name, amount, SI unit, price, and expiration date
    */
   public String toString() {
-    return foodName + ", " + amount + " " + siUnit + ", "
-        + expirationDate; // TODO Legge til pris(mener at det var en grunn til at jeg fjernet dette, se an.
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    return foodName + ", " + amount + " " + siUnit + ", " + expirationDate.format(formatter);
   }
 }

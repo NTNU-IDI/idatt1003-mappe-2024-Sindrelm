@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import edu.ntnu.idi.idatt.modules.Grocery;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.text.ParseException;
 
@@ -119,8 +120,9 @@ class GroceryTest {
   @Test
   void testGetExpirationDate() throws ParseException {
     Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    Date expirationDate = grocery.getExpirationDate();
-    assertEquals(expirationDate, new SimpleDateFormat("dd.MM.yyyy").parse("19.02.2004"));
+    LocalDate expirationDate = grocery.getExpirationDate();
+    LocalDate expectedDate = LocalDate.of(2004, 2, 19);
+    assertEquals(expectedDate, expirationDate);
   }
 
   /**
