@@ -13,9 +13,9 @@ public class Grocery {
   // Variables
   private final String foodName;
   private final String siUnit; // bare Unit, og ha med en til ting
-  private final Double price;  // potensielt questionable om dette skal være final og expirationDate
+  private final double price;  // potensielt questionable om dette skal være final og expirationDate
   private final LocalDate expirationDate;
-  private Double amount;
+  private double amount;
 
   /**
    * Constructs a new Grocery item.
