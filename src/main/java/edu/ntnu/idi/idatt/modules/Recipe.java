@@ -10,9 +10,9 @@ import java.util.NoSuchElementException;
 public class Recipe {
 
   private final ArrayList<Grocery> groceries;
-  private String shortDescription;
-  private String method;
-  private int nrOfPortions;
+  private final String shortDescription;
+  private final String method;
+  private final int nrOfPortions;
 
   /**
    * Constructs a new Recipe.
