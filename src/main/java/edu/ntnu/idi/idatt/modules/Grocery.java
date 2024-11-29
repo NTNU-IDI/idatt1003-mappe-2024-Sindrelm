@@ -125,7 +125,6 @@ public class Grocery {
   public boolean isExpired() {
     return LocalDate.now().isAfter(this.expirationDate);
   }
-  // TODO Legge til metoder for exceptionHandling der det gjøres mer enn en gang. (private metode)
 
   /**
    * Checks if the food item expires before the specified date.
@@ -165,7 +164,7 @@ public class Grocery {
     if (amount <= 0) {
       throw new IllegalArgumentException("Amount to remove must be positive");
     }
-    if (amount - this.amount > 0) {
+    if (amount > this.amount) {
       throw new IllegalArgumentException("Amount to remove exceeds current amount");
     }
     this.amount -= amount;
