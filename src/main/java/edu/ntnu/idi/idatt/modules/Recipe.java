@@ -26,15 +26,46 @@ public class Recipe {
    */
   public Recipe(ArrayList<Grocery> groceries, String shortDescription, String method,
       int nrOfPortions) {
-    if (groceries == null || shortDescription == null || method == null || nrOfPortions < 1) {
-      throw new IllegalArgumentException(
-          "Groceries, short description, nrOfPortions and method must be non-null");
-    }
+
     this.groceries = groceries;
     this.shortDescription = shortDescription;
     this.method = method;
     this.nrOfPortions = nrOfPortions;
+
+    verifyGroceries();
+    verifyShortDescription();
+    verifyMethod();
+    verifyNrOfPortions();
   }
+
+  private void verifyGroceries() {
+    if (this.groceries == null) {
+      throw new IllegalArgumentException(
+          "Groceries can not be null");
+    }
+  }
+
+  private void verifyShortDescription() {
+    if (this.shortDescription.isBlank()) {
+      throw new IllegalArgumentException(
+          "Short description can not be empty");
+    }
+  }
+
+  private void verifyMethod() {
+    if (this.method.isBlank()) {
+      throw new IllegalArgumentException(
+          "Method can not be empty");
+    }
+  }
+
+  private void verifyNrOfPortions() {
+    if (this.nrOfPortions < 1) {
+      throw new IllegalArgumentException(
+          "Number of portions must be at least 1");
+    }
+  }
+
 
   /**
    * Gets the list of groceries required for the recipe.
@@ -165,5 +196,4 @@ public class Recipe {
     }
     return true;
   }
-
 }
