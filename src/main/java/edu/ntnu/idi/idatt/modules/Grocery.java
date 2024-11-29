@@ -92,8 +92,8 @@ public class Grocery {
   }
 
   private void verifyFoodName() {
-    if (this.foodName == null) { // TODO exceptionhandling for blank strings
-      throw new IllegalArgumentException("Food name, SI unit and expiryDate must be non-null");
+    if (this.foodName == null || this.foodName.trim().isEmpty()) {
+      throw new IllegalArgumentException("Food name must be non-null");
     }
   }
 
