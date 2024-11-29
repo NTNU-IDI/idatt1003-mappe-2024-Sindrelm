@@ -37,15 +37,16 @@ public class FoodStorage {
    * Adds a grocery item to the storage. If the grocery item already exists, it adds the specified
    * amount to the existing item.
    *
-   * @param foodName the name of the food item to add
-   * @param siUnit   the SI unit of the food item
-   * @param amount   the amount of the food item
-   * @param price    the price of the food item
-   * @param date     the expiration date of the food item
+   * @param foodName       the name of the food item to add
+   * @param siUnit         the SI unit of the food item
+   * @param amount         the amount of the food item
+   * @param price          the price of the food item
+   * @param expirationDate the expiration expirationDate of the food item
    */
-  public void addGrocery(String foodName, String siUnit, double amount, double price, String date) {
+  public void addGrocery(String foodName, String siUnit, double amount, double price,
+      String expirationDate) {
     if (!groceryExists(foodName)) {
-      groceries.add(new Grocery(foodName, siUnit, amount, price, date)); // expirationDate
+      groceries.add(new Grocery(foodName, siUnit, amount, price, expirationDate)); // expirationDate
     } else {
       int groceryIndex = getGroceryIndex(foodName);
       groceries.get(groceryIndex).addAmount(amount);
@@ -74,7 +75,7 @@ public class FoodStorage {
   public void removeGroceryAmount(String foodName, double amount) {
     Grocery grocery = getGrocery(foodName);
     grocery.removeAmount(amount);
-    if (grocery.getAmount() == 0) { // TODO Questionable å la den bli negativ
+    if (grocery.getAmount() == 0) {
       removeGrocery(foodName);
     }
   }

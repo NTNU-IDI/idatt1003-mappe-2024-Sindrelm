@@ -11,8 +11,8 @@ public class Grocery {
 
   // Variables
   private final String foodName;
-  private final String unit; // bare Unit, og ha med en til ting
-  private final double price;  // potensielt questionable om dette skal være final og expirationDate
+  private final String unit;
+  private final double price;
   private final LocalDate expirationDate;
   private double amount;
 
@@ -177,6 +177,7 @@ public class Grocery {
    */
   public String toString() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-    return foodName + ", " + amount + " " + unit + ", " + expirationDate.format(formatter);
+    return foodName + ", " + amount + " " + unit + ", " + expirationDate.format(
+        formatter); //ha med pris?
   }
 }
