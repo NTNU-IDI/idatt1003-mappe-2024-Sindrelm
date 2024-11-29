@@ -46,7 +46,7 @@ public class FoodStorage {
   public void addGrocery(String foodName, String siUnit, double amount, double price,
       String expirationDate) {
     if (!groceryExists(foodName)) {
-      groceries.add(new Grocery(foodName, siUnit, amount, price, expirationDate)); // expirationDate
+      groceries.add(new Grocery(foodName, siUnit, amount, price, expirationDate));
     } else {
       int groceryIndex = getGroceryIndex(foodName);
       groceries.get(groceryIndex).addAmount(amount);
@@ -130,7 +130,7 @@ public class FoodStorage {
    * @throws ParseException if the date is not in the correct format
    */
 
-  public ArrayList<Grocery> getExpireBefore(String date) throws ParseException {
+  public ArrayList<Grocery> getGroceriesExpiringBefore(String date) throws ParseException {
     return groceries.stream()
         .filter(grocery -> grocery.expireBefore(date))
         .collect(Collectors.toCollection(ArrayList::new));
@@ -143,7 +143,7 @@ public class FoodStorage {
    */
   public ArrayList<Grocery> getAlphabeticallySortedGroceries() {
     groceries.sort(Comparator.comparing(
-        Grocery::getFoodName)); // TODO Kan bruke stream her??
+        Grocery::getFoodName));
     return groceries;
   }
 }

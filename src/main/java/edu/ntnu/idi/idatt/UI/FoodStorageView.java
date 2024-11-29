@@ -94,7 +94,7 @@ public class FoodStorageView {
           try {
             System.out.println("Enter date to check before(DD.MM.YYYY):");
             String date = System.console().readLine();
-            foodStorage.getExpireBefore(date).forEach(System.out::println);
+            foodStorage.getGroceriesExpiringBefore(date).forEach(System.out::println);
           } catch (Exception e) {
             System.out.println("Invalid input");
           }

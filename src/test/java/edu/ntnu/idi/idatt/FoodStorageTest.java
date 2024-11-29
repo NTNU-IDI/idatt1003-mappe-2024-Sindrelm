@@ -158,11 +158,11 @@ public class FoodStorageTest {
    * @throws ParseException if there is an error during parsing
    */
   @Test
-  void testGetExpireBefore() throws ParseException {
+  void testGetGroceriesExpiringBefore() throws ParseException {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
     foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2024");
     foodStorage.addGrocery("Banana", "kg", 1.0, 10.0, "19.02.2024");
-    assertEquals(2, foodStorage.getExpireBefore("19.02.2026").size());
+    assertEquals(2, foodStorage.getGroceriesExpiringBefore("19.02.2026").size());
   }
 
   /**
