@@ -27,20 +27,6 @@ public class Grocery {
    */
   public Grocery(String foodName, String unit, double amount, double price,
       String expirationDate) {
-    if (foodName == null || unit == null
-        || expirationDate == null) { // TODO exceptionhandling for blank strings
-      throw new IllegalArgumentException("Food name, SI unit and expiryDate must be non-null");
-    }
-    if (amount < 0) {
-      throw new IllegalArgumentException("Amount must be a positive number");
-    }
-    if (price < 0) {
-      throw new IllegalArgumentException("Price must be a positive number");
-    }
-    if (!unit.equals("kg") && !unit.equals("l")) {
-      throw new IllegalArgumentException(
-          "SI unit must be kg or l"); // potensielt endre til enum eller set og kanskje ha med pieces eller noe sånt
-    }
 
     try {
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -53,6 +39,11 @@ public class Grocery {
     this.unit = unit;
     this.amount = amount;
     this.price = price;
+
+    verifyFoodName();
+    verifyAmount();
+    verifyPrice();
+    verifyUnit();
   }
 
   /**
@@ -98,6 +89,32 @@ public class Grocery {
    */
   public LocalDate getExpirationDate() {
     return this.expirationDate;
+  }
+
+  private void verifyFoodName() {
+    if (this.foodName == null) { // TODO exceptionhandling for blank strings
+      throw new IllegalArgumentException("Food name, SI unit and expiryDate must be non-null");
+    }
+  }
+
+  private void verifyAmount() {
+    if (this.amount < 0) {
+      throw new IllegalArgumentException("Amount must be a positive number");
+    }
+  }
+
+  private void verifyPrice() {
+    if (this.price < 0) {
+      throw new IllegalArgumentException("Price must be a positive number");
+    }
+
+  }
+
+  private void verifyUnit() {
+    if (!("kg").equals(this.unit) && !("l").equals(this.unit)) {
+      throw new IllegalArgumentException(
+          "SI unit must be kg or l"); // potensielt endre til enum eller set og kanskje ha med pieces eller noe sånt
+    }
   }
 
   /**

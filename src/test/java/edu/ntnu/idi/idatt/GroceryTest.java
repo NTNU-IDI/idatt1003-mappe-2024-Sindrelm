@@ -32,7 +32,7 @@ class GroceryTest {
   @Test
   void wrongSiUnit() {
     assertThrows(IllegalArgumentException.class,
-        () -> new Grocery("Apple", "mg", 1.0, 10.0, null));
+        () -> new Grocery("Apple", "mg", 1.0, 10.0, "11.11.1111"));
   }
 
   /**
@@ -41,7 +41,7 @@ class GroceryTest {
   @Test
   void nullFoodName() {
     assertThrows(IllegalArgumentException.class,
-        () -> new Grocery(null, "kg", 1.0, 10.0, null));
+        () -> new Grocery(null, "kg", 1.0, 10.0, "11.11.1111"));
   }
 
   /**
@@ -50,16 +50,7 @@ class GroceryTest {
   @Test
   void nullSiUnit() {
     assertThrows(IllegalArgumentException.class,
-        () -> new Grocery("Apple", null, 1.0, 10.0, null));
-  }
-
-  /**
-   * Tests that an exception is thrown for a null expiration date.
-   */
-  @Test
-  void nullDate() {
-    assertThrows(IllegalArgumentException.class,
-        () -> new Grocery("Apple", "kg", 1.0, 10.0, null));
+        () -> new Grocery("Apple", null, 1.0, 10.0, "11.11.1111"));
   }
 
   @Test
