@@ -86,32 +86,12 @@ public class Recipe {
   }
 
   /**
-   * Updates the short description of the recipe.
-   *
-   * @param shortDescription the new short description
-   */
-  public void setShortDescription(String shortDescription) {
-    this.shortDescription = shortDescription;
-    verifyShortDescription();
-  }
-
-  /**
    * Gets the method or instructions to prepare the recipe.
    *
    * @return the method
    */
   public String getMethod() {
     return method;
-  }
-
-  /**
-   * Updates the method or instructions to prepare the recipe.
-   *
-   * @param method the new method
-   */
-  public void setMethod(String method) {
-    this.method = method;
-    verifyMethod();
   }
 
   /**
@@ -156,16 +136,25 @@ public class Recipe {
     return recipeInformation.toString();
   }
 
+
   /**
-   * Adds a grocery item to the recipe.
+   * Updates the short description of the recipe.
    *
-   * @param foodName the name of the food item
-   * @param siUnit   the SI unit of the food item
-   * @param amount   the amount of the food item
-   * @param price    the price of the food item
+   * @param shortDescription the new short description
    */
-  public void addGrocery(String foodName, String siUnit, double amount, double price) {
-    groceries.add(new Grocery(foodName, siUnit, amount, price, "11.11.1111"));
+  public void setShortDescription(String shortDescription) {
+    this.shortDescription = shortDescription;
+    verifyShortDescription();
+  }
+
+  /**
+   * Updates the method or instructions to prepare the recipe.
+   *
+   * @param method the new method
+   */
+  public void setMethod(String method) {
+    this.method = method;
+    verifyMethod();
   }
 
   /**
@@ -176,6 +165,18 @@ public class Recipe {
   public void setNumberOfPortions(int nrOfPortions) {
     this.nrOfPortions = nrOfPortions;
     verifyNrOfPortions();
+  }
+
+  /**
+   * Adds a grocery item to the recipe.
+   *
+   * @param foodName the name of the food item
+   * @param siUnit   the SI unit of the food item
+   * @param amount   the amount of the food item
+   * @param price    the price of the food item
+   */
+  public void addGrocery(String foodName, String siUnit, double amount, double price) {
+    groceries.add(new Grocery(foodName, siUnit, amount, price, "11.11.1111"));
   }
 
   /**
