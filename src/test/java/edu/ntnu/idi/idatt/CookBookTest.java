@@ -7,6 +7,7 @@ import edu.ntnu.idi.idatt.modules.FoodStorage;
 import edu.ntnu.idi.idatt.modules.Grocery;
 import edu.ntnu.idi.idatt.modules.Recipe;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -26,7 +27,7 @@ public class CookBookTest {
     // Act
     try {
       cookBook.getRecipeIndex("Short description");
-    } catch (IllegalArgumentException e) {
+    } catch (NoSuchElementException e) {
       // Assert
       assertEquals("Recipe not found in Cook Book", e.getMessage());
     }

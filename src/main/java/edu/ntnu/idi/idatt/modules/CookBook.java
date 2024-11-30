@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt.modules;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 /**
  * Represents a cookbook containing a collection of recipes.
@@ -26,14 +27,12 @@ public class CookBook {
    * @throws IllegalArgumentException if the recipe is not found
    */
   public int getRecipeIndex(String shortDescription) {
-    int i = 0;
-    while (i < recipes.size()) {
-      if (recipes.get(i).getShortDescription().equals(shortDescription)) {
-        return i;
+    for (int recipeIndex = 0; recipeIndex < recipes.size(); recipeIndex++) {
+      if (recipes.get(recipeIndex).getShortDescription().equals(shortDescription)) {
+        return recipeIndex;
       }
-      i++;
     }
-    throw new IllegalArgumentException("Recipe not found in Cook Book");
+    throw new NoSuchElementException("Recipe not found in Cook Book");
   }
 
   /**
