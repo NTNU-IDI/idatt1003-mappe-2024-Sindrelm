@@ -99,7 +99,7 @@ public class Recipe {
    *
    * @return the number of portions
    */
-  public int getNrOfPortions() {
+  public int getNumberOfPortions() {
     return nrOfPortions;
   }
 

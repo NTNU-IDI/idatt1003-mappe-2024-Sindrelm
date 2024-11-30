@@ -119,6 +119,6 @@ public class RecipeTest {
   void testSetNumberOfPortions() {
     Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
     recipe.setNumberOfPortions(2);
-    assertEquals(recipe.getNrOfPortions(), 2);
+    assertEquals(recipe.getNumberOfPortions(), 2);
   }
 }
