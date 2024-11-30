@@ -110,7 +110,7 @@ public class Recipe {
    */
   public double getRecipePrice() {
     return groceries.stream()
-        .mapToDouble(grocery -> grocery.getTotalPrice() * grocery.getAmount())
+        .mapToDouble(Grocery::getTotalPrice)
         .sum();
   }
 
