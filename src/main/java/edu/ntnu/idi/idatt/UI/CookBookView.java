@@ -52,6 +52,9 @@ public class CookBookView {
             Recipe recipe = new Recipe(new ArrayList<>(), name, description, servings);
             System.out.print("Enter the number of ingredients:");
             int numberOfIngredients = Integer.parseInt(System.console().readLine());
+            if (numberOfIngredients <= 0) {
+              throw new IllegalArgumentException("Number of ingredients must be greater than 0");
+            }
 
             int i = 1;
             while (i < numberOfIngredients + 1) {
