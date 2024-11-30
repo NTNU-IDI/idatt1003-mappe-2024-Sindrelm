@@ -92,6 +92,7 @@ public class Recipe {
    */
   public void setShortDescription(String shortDescription) {
     this.shortDescription = shortDescription;
+    verifyShortDescription();
   }
 
   /**
@@ -110,6 +111,7 @@ public class Recipe {
    */
   public void setMethod(String method) {
     this.method = method;
+    verifyMethod();
   }
 
   /**
@@ -173,6 +175,7 @@ public class Recipe {
    */
   public void setNumberOfPortions(int nrOfPortions) {
     this.nrOfPortions = nrOfPortions;
+    verifyNrOfPortions();
   }
 
   /**
