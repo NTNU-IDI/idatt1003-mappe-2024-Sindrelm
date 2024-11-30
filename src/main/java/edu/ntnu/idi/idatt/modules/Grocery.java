@@ -73,6 +73,10 @@ public class Grocery {
     return amount;
   }
 
+  public double getPrice() {
+    return price;
+  }
+
   /**
    * Gets the price of the food item.
    *
