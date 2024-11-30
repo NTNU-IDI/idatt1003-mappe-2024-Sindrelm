@@ -114,6 +114,7 @@ public class Recipe {
         .sum();
   }
 
+
   /**
    * Gets the detailed information of the recipe.
    *
@@ -186,18 +187,12 @@ public class Recipe {
    * @return true if all required groceries are available in sufficient amounts, false otherwise
    */
   public boolean checkFoodStorage(FoodStorage foodStorage) {
-    for (Grocery grocery : groceries) {
+    return groceries.stream().allMatch(grocery -> {
       try {
-        double recipeAmount = grocery.getAmount();
-        double foodStorageAmount = foodStorage.getGrocery(grocery.getFoodName()).getAmount();
-        double amountDifference = foodStorageAmount - recipeAmount;
-        if (amountDifference < 0) {
-          return false;
-        }
+        return foodStorage.getGrocery(grocery.getFoodName()).getAmount() >= grocery.getAmount();
       } catch (NoSuchElementException e) {
         return false;
       }
-    }
-    return true;
+    });
   }
 }
