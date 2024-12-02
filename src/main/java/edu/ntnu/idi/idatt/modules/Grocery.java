@@ -15,6 +15,7 @@ public class Grocery {
   private final double price;
   private final LocalDate expirationDate;
   private double amount;
+  public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
   /**
    * Constructs a new Grocery item.
@@ -35,7 +36,7 @@ public class Grocery {
       throw new IllegalArgumentException("Expiration date must be in the format DD.MM.YYYY", e);
     }
 
-    verifyFoodName(foodName);
+    verifyName(foodName);
     verifyAmount(amount);
     verifyPrice(price);
     verifyUnit(unit);
@@ -95,9 +96,17 @@ public class Grocery {
     return this.expirationDate;
   }
 
-  public static void verifyFoodName(String foodName) {
+  public static void verifyName(String foodName) {
     if (foodName == null || foodName.trim().isEmpty()) {
       throw new IllegalArgumentException("Food name must be non-null");
+    }
+  }
+
+  public static void verifyExpirationDate(String expirationDate) {
+    try {
+      LocalDate.parse(expirationDate, formatter);
+    } catch (DateTimeParseException e) {
+      throw new IllegalArgumentException("Expiration date must be in the format DD.MM.YYYY", e);
     }
   }
 
