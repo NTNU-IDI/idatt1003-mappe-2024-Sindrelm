@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt.UI;
 
 import static edu.ntnu.idi.idatt.UI.UserInterface.foodStorage;
 
+import edu.ntnu.idi.idatt.modules.Grocery;
 import java.text.ParseException;
 
 /**
@@ -45,15 +46,25 @@ public class FoodStorageView {
           try {
             System.out.println("Enter name of grocery:");
             String name = System.console().readLine();
+            Grocery.verifyName(name);
+
             System.out.println("Enter SI unit of grocery (kg or l):");
-            String siUnit = System.console().readLine();
+            String unit = System.console().readLine();
+            Grocery.verifyUnit(unit);
+
             System.out.println("Enter amount of grocery:");
             double amount = Double.parseDouble(System.console().readLine());
+            Grocery.verifyAmount(amount);
+
             System.out.println("Enter price of grocery (per kg or per l):");
             double price = Double.parseDouble(System.console().readLine());
+            Grocery.verifyPrice(price);
+
             System.out.println("Enter expiration date of grocery(DD.MM.YYYY):");
-            String date = System.console().readLine();
-            foodStorage.addGrocery(name, siUnit, amount, price, date);
+            String expirationDate = System.console().readLine();
+            Grocery.verifyExpirationDate(expirationDate);
+
+            foodStorage.addGrocery(name, unit, amount, price, expirationDate);
             System.out.println("Grocery " + name + " added to food storage\n");
           } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -73,6 +84,8 @@ public class FoodStorageView {
           try {
             System.out.println("Enter name of grocery:");
             String name = System.console().readLine();
+            Grocery.verifyName(name);
+
             System.out.println("Enter amount to remove:");
             double amount = Double.parseDouble(System.console().readLine());
             foodStorage.removeGroceryAmount(name, amount);
@@ -93,6 +106,8 @@ public class FoodStorageView {
           try {
             System.out.println("Enter date to check before(DD.MM.YYYY):");
             String date = System.console().readLine();
+            Grocery.verifyExpirationDate(date);
+
             foodStorage.getGroceriesExpiringBefore(date).forEach(System.out::println);
           } catch (Exception e) {
             System.out.println(e.getMessage());
