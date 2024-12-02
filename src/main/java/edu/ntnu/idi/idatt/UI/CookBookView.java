@@ -31,7 +31,7 @@ public class CookBookView {
       try {
         choice = Integer.parseInt(System.console().readLine());
       } catch (NumberFormatException e) {
-        System.out.println("Invalid input");
+        System.out.println(e.getMessage());
         return;
       }
 
@@ -53,7 +53,8 @@ public class CookBookView {
             System.out.print("Enter the number of ingredients:");
             int numberOfIngredients = Integer.parseInt(System.console().readLine());
             if (numberOfIngredients <= 0) {
-              throw new IllegalArgumentException("Number of ingredients must be greater than 0");
+              throw new IllegalArgumentException(
+                  "Number of ingredients must be greater than 0"); //TODO flytte exception handling til Recipe
             }
 
             int i = 1;
@@ -73,7 +74,7 @@ public class CookBookView {
             cookBook.addRecipe(recipe);
             System.out.println("Recipe " + recipe.getShortDescription() + ", added to cookbook\n");
           } catch (Exception e) {
-            System.out.println("An error occurred while adding the recipe. Please try again.");
+            System.out.println(e.getMessage());
           }
         }
         case 2 -> {
@@ -85,7 +86,7 @@ public class CookBookView {
             String recipeName = System.console().readLine();
             System.out.println(cookBook.getRecipe(recipeName).getRecipeInformation());
           } catch (Exception e) {
-            System.out.println("The Recipe does not exist, or is misspelled");
+            System.out.println(e.getMessage());
           }
         }
         case 4 -> {

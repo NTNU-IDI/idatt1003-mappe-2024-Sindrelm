@@ -92,7 +92,7 @@ public class Recipe {
    */
   public String getMethod() {
     return method;
-  }
+  }  //TODO s@rge
 
   /**
    * Gets the number of portions the recipe yields.

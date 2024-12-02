@@ -32,7 +32,7 @@ public class FoodStorageView {
       try {
         choice = Integer.parseInt(System.console().readLine());
       } catch (NumberFormatException e) {
-        System.out.println("Invalid input");
+        System.out.println(e.getMessage());
         return;
       }
 
@@ -53,11 +53,10 @@ public class FoodStorageView {
             double price = Double.parseDouble(System.console().readLine());
             System.out.println("Enter expiration date of grocery(DD.MM.YYYY):");
             String date = System.console().readLine();
-
             foodStorage.addGrocery(name, siUnit, amount, price, date);
             System.out.println("Grocery " + name + " added to food storage\n");
           } catch (Exception e) {
-            System.out.println("Invalid input");
+            System.out.println(e.getMessage());
           }
         }
         case 2 -> {
@@ -67,7 +66,7 @@ public class FoodStorageView {
             foodStorage.removeGrocery(name);
             System.out.println("Grocery " + name + " removed from food storage\n");
           } catch (Exception e) {
-            System.out.println("Invalid input");
+            System.out.println(e.getMessage());
           }
         }
         case 3 -> {
@@ -81,7 +80,7 @@ public class FoodStorageView {
                 "Removed " + amount + foodStorage.getGrocery(name).getUnit() + " of " + name
                     + " from the food storage\n");
           } catch (Exception e) {
-            System.out.println("Invalid input");
+            System.out.println(e.getMessage());
           }
         }
         case 4 -> {
@@ -96,7 +95,7 @@ public class FoodStorageView {
             String date = System.console().readLine();
             foodStorage.getGroceriesExpiringBefore(date).forEach(System.out::println);
           } catch (Exception e) {
-            System.out.println("Invalid input");
+            System.out.println(e.getMessage());
           }
         }
         default -> System.out.println("Invalid input");
