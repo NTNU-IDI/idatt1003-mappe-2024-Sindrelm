@@ -35,15 +35,15 @@ public class Grocery {
       throw new IllegalArgumentException("Expiration date must be in the format DD.MM.YYYY", e);
     }
 
+    verifyFoodName(foodName);
+    verifyAmount(amount);
+    verifyPrice(price);
+    verifyUnit(unit);
+
     this.foodName = foodName;
     this.unit = unit;
     this.amount = amount;
     this.price = price;
-
-    verifyFoodName();
-    verifyAmount();
-    verifyPrice();
-    verifyUnit();
   }
 
   /**
@@ -95,27 +95,27 @@ public class Grocery {
     return this.expirationDate;
   }
 
-  private void verifyFoodName() {
-    if (this.foodName == null || this.foodName.trim().isEmpty()) {
+  public static void verifyFoodName(String foodName) {
+    if (foodName == null || foodName.trim().isEmpty()) {
       throw new IllegalArgumentException("Food name must be non-null");
     }
   }
 
-  private void verifyAmount() {
-    if (this.amount < 0) {
+  public static void verifyAmount(double amount) {
+    if (amount < 0) {
       throw new IllegalArgumentException("Amount must be a positive number");
     }
   }
 
-  private void verifyPrice() {
-    if (this.price < 0) {
+  public static void verifyPrice(double price) {
+    if (price < 0) {
       throw new IllegalArgumentException("Price must be a positive number");
     }
 
   }
 
-  private void verifyUnit() {
-    if (!("kg").equals(this.unit) && !("l").equals(this.unit)) {
+  public static void verifyUnit(String unit) {
+    if (!("kg").equals(unit) && !("l").equals(unit)) {
       throw new IllegalArgumentException(
           "SI unit must be kg or l"); // potensielt endre til enum eller set og kanskje ha med pieces eller noe sånt
     }
