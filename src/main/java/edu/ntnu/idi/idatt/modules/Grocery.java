@@ -47,6 +47,41 @@ public class Grocery {
     this.price = price;
   }
 
+  public static void verifyName(String foodName) {
+    if (foodName == null || foodName.trim().isEmpty()) {
+      throw new IllegalArgumentException("Food name must be non-null");
+    }
+  }
+
+  public static void verifyExpirationDate(String expirationDate) {
+    try {
+      LocalDate.parse(expirationDate, formatter);
+    } catch (DateTimeParseException e) {
+      throw new IllegalArgumentException("Expiration date must be in the format DD.MM.YYYY", e);
+    }
+  }
+
+  public static void verifyAmount(double amount) {
+    if (amount < 0) {
+      throw new IllegalArgumentException("Amount must be a positive number");
+    }
+  }
+
+  public static void verifyPrice(double price) {
+    if (price < 0) {
+      throw new IllegalArgumentException("Price must be a positive number");
+    }
+
+  }
+
+  public static void verifyUnit(String unit) {
+    if (!("kg").equals(unit) && !("l").equals(unit)) {
+      throw new IllegalArgumentException(
+          "SI unit must be kg or l"); // potensielt endre til enum eller set og kanskje ha med pieces eller noe sånt
+    }
+  }
+
+
   /**
    * Gets the name of the food item.
    *
@@ -92,66 +127,6 @@ public class Grocery {
     return this.expirationDate;
   }
 
-  public static void verifyName(String foodName) {
-    if (foodName == null || foodName.trim().isEmpty()) {
-      throw new IllegalArgumentException("Food name must be non-null");
-    }
-  }
-
-  public static void verifyExpirationDate(String expirationDate) {
-    try {
-      LocalDate.parse(expirationDate, formatter);
-    } catch (DateTimeParseException e) {
-      throw new IllegalArgumentException("Expiration date must be in the format DD.MM.YYYY", e);
-    }
-  }
-
-  public static void verifyAmount(double amount) {
-    if (amount < 0) {
-      throw new IllegalArgumentException("Amount must be a positive number");
-    }
-  }
-
-  public static void verifyPrice(double price) {
-    if (price < 0) {
-      throw new IllegalArgumentException("Price must be a positive number");
-    }
-
-  }
-
-  public static void verifyUnit(String unit) {
-    if (!("kg").equals(unit) && !("l").equals(unit)) {
-      throw new IllegalArgumentException(
-          "SI unit must be kg or l"); // potensielt endre til enum eller set og kanskje ha med pieces eller noe sånt
-    }
-  }
-
-  /**
-   * Checks if the food item is still valid based on the current date.
-   *
-   * @return true if the food item is expired, false otherwise
-   */
-  public boolean isExpired() {
-    return LocalDate.now().isAfter(this.expirationDate);
-  }
-
-  /**
-   * Checks if the food item expires before the specified date.
-   *
-   * @param date the date to compare with, in the format DD.MM.YYYY
-   * @return true if the food item expires before the specified date, false otherwise
-   */
-  public boolean expireBefore(String date) {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-    LocalDate compareDate;
-    try {
-      compareDate = LocalDate.parse(date, formatter);
-    } catch (DateTimeParseException e) {
-      throw new IllegalArgumentException("Date must be in the format DD.MM.YYYY", e);
-    }
-    return this.expirationDate.isBefore(compareDate);
-  }
-
   /**
    * Adds the specified amount to the current amount of the food item.
    *
@@ -177,6 +152,33 @@ public class Grocery {
       throw new IllegalArgumentException("Amount to remove exceeds current amount");
     }
     this.amount -= amount;
+  }
+
+
+  /**
+   * Checks if the food item is still valid based on the current date.
+   *
+   * @return true if the food item is expired, false otherwise
+   */
+  public boolean isExpired() {
+    return LocalDate.now().isAfter(this.expirationDate);
+  }
+
+  /**
+   * Checks if the food item expires before the specified date.
+   *
+   * @param date the date to compare with, in the format DD.MM.YYYY
+   * @return true if the food item expires before the specified date, false otherwise
+   */
+  public boolean expireBefore(String date) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    LocalDate compareDate;
+    try {
+      compareDate = LocalDate.parse(date, formatter);
+    } catch (DateTimeParseException e) {
+      throw new IllegalArgumentException("Date must be in the format DD.MM.YYYY", e);
+    }
+    return this.expirationDate.isBefore(compareDate);
   }
 
   /**
