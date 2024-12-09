@@ -74,10 +74,6 @@ public class Grocery {
     return amount;
   }
 
-  public double getPrice() {
-    return price;
-  }
-
   /**
    * Gets the price of the food item.
    *
@@ -191,6 +187,6 @@ public class Grocery {
   public String toString() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     return foodName + ", " + amount + " " + unit + ", " + expirationDate.format(
-        formatter); //ha med pris?
+        formatter);
   }
 }
