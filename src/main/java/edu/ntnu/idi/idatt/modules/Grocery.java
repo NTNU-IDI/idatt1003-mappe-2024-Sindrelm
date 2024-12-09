@@ -30,10 +30,10 @@ public class Grocery {
    * Constructs a new Grocery item.
    *
    * @param name           the name of the food item
-   * @param unit           the SI unit of the food item (kg or l)
+   * @param unit           the unit of the food item (kg or l)
    * @param amount         the amount of the food item
    * @param price          the price of the food item in kr/kg or kr/l
-   * @param expirationDate the expiration expiryDate of the food item
+   * @param expirationDate the expiration expiryDate of the food item (DD.MM.YYYY)
    */
   public Grocery(String name, String unit, double amount, double price,
       String expirationDate) {
@@ -209,6 +209,7 @@ public class Grocery {
    *
    * @param date the date to compare with, in the format DD.MM.YYYY
    * @return true if the food item expires before the specified date, false otherwise
+   * @throws IllegalArgumentException if the date is not in the correct format
    */
   public boolean expireBefore(String date) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
