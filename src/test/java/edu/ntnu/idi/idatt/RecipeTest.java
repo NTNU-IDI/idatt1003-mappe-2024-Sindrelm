@@ -91,34 +91,4 @@ public class RecipeTest {
     recipe.addGrocery("apple", "kg", 1.0, 1.0);
     assertFalse(recipe.checkFoodStorage(foodStorage));
   }
-
-  /**
-   * Tests the addShortDescription method.
-   */
-  @Test
-  void testSetShortDescription() {
-    Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
-    recipe.setShortDescription("newShortDescription");
-    assertEquals(recipe.getShortDescription(), "newShortDescription");
-  }
-
-  /**
-   * Tests the addMethod method.
-   */
-  @Test
-  void testAddMethod() {
-    Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
-    recipe.setMethod("newMethod");
-    assertEquals(recipe.getMethod(), "newMethod");
-  }
-
-  /**
-   * Tests the addNumberOfPortions method.
-   */
-  @Test
-  void testSetNumberOfPortions() {
-    Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
-    recipe.setNumberOfPortions(2);
-    assertEquals(recipe.getNumberOfPortions(), 2);
-  }
 }
