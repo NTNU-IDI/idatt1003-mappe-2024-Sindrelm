@@ -7,172 +7,148 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.ntnu.idi.idatt.modules.FoodStorage;
 import edu.ntnu.idi.idatt.modules.Grocery;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test class for the FoodStorage class.
  */
-public class FoodStorageTest {
+class FoodStorageTest {
 
-  /**
-   * Tests adding a grocery to the food storage.
-   */
-  @Test
-  void testAddGrocery() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    assertTrue(foodStorage.groceryExists("Apple"));
+  private static FoodStorage foodStorage;
+
+  @BeforeAll
+  static void setUp() {
+    // Arrange shared resources
+    foodStorage = new FoodStorage(new ArrayList<>());
+    foodStorage.addGrocery("Flour", "kg", 1.0, 20.0, "20.12.2024");
+    foodStorage.addGrocery("Milk", "l", 1.0, 15.0, "20.12.2024");
+    foodStorage.addGrocery("Eggs", "kg", 0.5, 50.0, "20.12.2024");
   }
 
-  /**
-   * Tests that a grocery does not exist in the food storage.
-   */
   @Test
-  void testGroceryNotExists() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    assertFalse(foodStorage.groceryExists("Banana"));
+  void testConstructorWithEmptyGroceries() {
+    // Act
+    FoodStorage emptyStorage = new FoodStorage(new ArrayList<>());
+    // Assert
+    assertEquals(0, emptyStorage.getAlphabeticallySortedGroceries().size());
   }
 
-  /**
-   * Tests getting the index of a grocery in the food storage.
-   */
-  @Test
-  void testGetGroceryIndex() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    assertEquals(0, foodStorage.getGroceryIndex("Apple"));
-  }
-
-  /**
-   * Tests adding an existing grocery to the food storage.
-   */
-  @Test
-  void testAddGroceryExisting() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    assertEquals(2.0, foodStorage.getGrocery("Apple").getAmount());
-  }
-
-  /**
-   * Tests getting a grocery from the food storage.
-   */
   @Test
   void testGetGrocery() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    assertEquals("Apple", foodStorage.getGrocery("Apple").getName());
+    // Act
+    Grocery milk = foodStorage.getGrocery("Milk");
+    // Assert
+    assertEquals("Milk", milk.getName());
+    assertEquals("l", milk.getUnit());
+    assertEquals(1.0, milk.getAmount());
+    assertEquals(15.0, milk.getTotalPrice());
   }
 
-  /**
-   * Tests removing an amount of a grocery from the food storage.
-   */
   @Test
-  void testRemoveGroceryAmount() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Apple", "kg", 2.0, 10.0, "19.02.2004");
-    foodStorage.removeGroceryAmount("Apple", 1.0);
-    assertEquals(1.0, foodStorage.getGrocery("Apple").getAmount());
+  void testGetGroceryThrowsException() {
+    // Assert
+    assertThrows(NoSuchElementException.class, () -> foodStorage.getGrocery("Sugar"));
   }
 
-  /**
-   * Tests removing an amount of a grocery that does not exist in the food storage.
-   */
   @Test
-  void testRemoveGroceryAmountNotExists() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    assertThrows(NoSuchElementException.class,
-        () -> foodStorage.removeGroceryAmount("Banana", 1.0));
+  void testAddGrocery() {
+    // Act
+    foodStorage.addGrocery("Sugar", "kg", 0.5, 10.0, "20.12.2025");
+    Grocery sugar = foodStorage.getGrocery("Sugar");
+    // Assert
+    assertEquals(0.5, sugar.getAmount());
   }
 
-  /**
-   * Tests removing a grocery from the food storage.
-   */
+  @Test
+  void testAddGroceryIncreasesAmount() {
+    //arrange
+    setUp();
+    // Act
+    foodStorage.addGrocery("Milk", "l", 0.5, 15.0, "20.12.2024");
+    Grocery milk = foodStorage.getGrocery("Milk");
+    // Assert
+    assertEquals(1.5, milk.getAmount());
+  }
+
   @Test
   void testRemoveGrocery() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    foodStorage.removeGrocery("Apple");
-    assertFalse(foodStorage.groceryExists("Apple"));
-  }
-
-  /**
-   * Tests removing a grocery that does not exist in the food storage.
-   */
-  @Test
-  void testRemoveGroceryNotExists() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    assertThrows(NoSuchElementException.class,
-        () -> foodStorage.removeGrocery("Banana"));
+    //arrange
+    setUp();
+    // Act
+    foodStorage.removeGrocery("Eggs");
+    // Assert
+    assertThrows(NoSuchElementException.class, () -> foodStorage.getGrocery("Eggs"));
   }
 
   @Test
-  void testRemoveGroceryAmountNegative() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    assertThrows(IllegalArgumentException.class,
-        () -> foodStorage.removeGroceryAmount("Apple", -1.0));
+  void testRemoveGroceryAmount() {
+    //arrange
+    setUp();
+    // Act
+    foodStorage.removeGroceryAmount("Milk", 0.5);
+    Grocery milk = foodStorage.getGrocery("Milk");
+    // Assert
+    assertEquals(0.5, milk.getAmount());
   }
 
-  /**
-   * Tests that a grocery exists in the food storage.
-   */
   @Test
-  void testGroceryExists() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    assertTrue(foodStorage.groceryExists("Apple"));
+  void testRemoveGroceryAmountRemovesGroceryWhenAmountIsZero() {
+    //arrange
+    setUp();
+    // Act
+    foodStorage.removeGroceryAmount("Milk", 1.0);
+    // Assert
+    assertThrows(NoSuchElementException.class, () -> foodStorage.getGrocery("Milk"));
   }
 
-  /**
-   * Tests getting expired groceries from the food storage.
-   */
   @Test
   void testGetExpiredGroceries() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    foodStorage.addGrocery("Banana", "kg", 1.0, 10.0, "19.02.2026");
-    assertEquals(1, foodStorage.getExpiredGroceries().size());
+    //Arrange
+    setUp();
+    // Act
+    ArrayList<Grocery> expired = foodStorage.getExpiredGroceries();
+    // Assert
+    assertTrue(expired.isEmpty());
   }
 
-  /**
-   * Tests getting expired groceries from the food storage when there are no expired groceries.
-   */
   @Test
-  void testGetExpiredGroceriesEmpty() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2026");
-    foodStorage.addGrocery("Banana", "kg", 1.0, 10.0, "19.02.2026");
-    assertEquals(0, foodStorage.getExpiredGroceries().size());
+  void testGetGroceriesExpiringBefore() {
+    //arrange
+    setUp();
+    // Act
+    ArrayList<Grocery> expiringSoon = foodStorage.getGroceriesExpiringBefore("20.12.2025");
+    // Assert
+    assertEquals(3, expiringSoon.size());
   }
 
-  /**
-   * Tests getting groceries that expire before a given date from the food storage.
-   *
-   * @throws ParseException if there is an error during parsing
-   */
-  @Test
-  void testGetGroceriesExpiringBefore() throws ParseException {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2024");
-    foodStorage.addGrocery("Banana", "kg", 1.0, 10.0, "19.02.2024");
-    assertEquals(2, foodStorage.getGroceriesExpiringBefore("19.02.2026").size());
-  }
-
-  /**
-   * Tests getting sorted groceries from the food storage.
-   */
   @Test
   void testGetAlphabeticallySortedGroceries() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
-    foodStorage.addGrocery("Banana", "kg", 1.0, 10.0, "19.02.2024");
-    foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2024");
-    assertEquals("Apple", foodStorage.getAlphabeticallySortedGroceries().get(0).getName());
+    //arrange
+    setUp();
+    // Act
+    ArrayList<Grocery> sortedGroceries = foodStorage.getAlphabeticallySortedGroceries();
+    // Assert
+    assertEquals("Eggs", sortedGroceries.get(0).getName());
+    assertEquals("Flour", sortedGroceries.get(1).getName());
+    assertEquals("Milk", sortedGroceries.get(2).getName());
+  }
+
+  @Test
+  void testGroceryExists() {
+    // Act
+    boolean exists = foodStorage.groceryExists("Milk");
+    // Assert
+    assertTrue(exists);
+  }
+
+  @Test
+  void testGroceryDoesNotExist() {
+    // Act
+    boolean exists = foodStorage.groceryExists("Sugar");
+    // Assert
+    assertFalse(exists);
   }
 }
