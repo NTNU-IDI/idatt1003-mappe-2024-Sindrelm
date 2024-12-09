@@ -31,17 +31,36 @@ public class UserInterface {
     foodStorage.addGrocery("Egg", "kg", 0.6, 50, "28.11.2024");
     foodStorage.addGrocery("Flour", "kg", 1, 27, "31.12.2028");
 
-    Recipe pannekakerOppskrift = new Recipe(new ArrayList<>(), "Pannekaker", "Bla, Bla, Bla", 4);
-    pannekakerOppskrift.addGrocery("Milk", "l", 0.5, 20);
-    pannekakerOppskrift.addGrocery("Flour", "kg", 0.5, 27);
-    pannekakerOppskrift.addGrocery("Egg", "kg", 0.6, 50);
-    cookBook.addRecipe(pannekakerOppskrift);
+    String pancakesMethod = """
+        1. In a large mixing bowl, combine 0.5 liters of milk, 0.2 kg of eggs, and 0.5 kg of flour.
+        2. Whisk the ingredients together until you have a smooth batter.
+        3. Heat a non-stick frying pan over medium heat.
+        4. Pour a bit of batter onto the pan and spread it evenly.
+        5. Cook until bubbles form on the surface and the edges look set, then flip the pancake.
+        6. Cook the other side until golden brown.
+        7. Repeat with the remaining batter.
+        8. Serve the pancakes warm with your choice of toppings like syrup, fruit, or jam.
+        """;
+    Recipe pancakeRecipe = new Recipe(new ArrayList<>(), "Pancakes", pancakesMethod, 4);
+    pancakeRecipe.addGrocery("Milk", "l", 0.5, 20);
+    pancakeRecipe.addGrocery("Flour", "kg", 0.5, 27);
+    pancakeRecipe.addGrocery("Egg", "kg", 0.2, 50);
+    cookBook.addRecipe(pancakeRecipe);
 
-    Recipe salatOppskrift = new Recipe(new ArrayList<>(), "Salat", "Bla, Bla, Bla", 4);
-    salatOppskrift.addGrocery("Apple", "kg", 0.5, 32);
-    salatOppskrift.addGrocery("Mango", "kg", 0.5, 65);
-    salatOppskrift.addGrocery("Salatblader", "kg", 0.5, 29);
-    cookBook.addRecipe(salatOppskrift);
+    String saladMethod = """
+        1. Wash 0.5 kg of apples, 0.5 kg of mangoes, and 0.5 kg of salad greens thoroughly.
+        2. Chop the apples and mangoes into bite-sized pieces.
+        3. Tear the salad greens into smaller pieces if needed.
+        4. In a large salad bowl, combine the chopped apples, mangoes, and salad greens.
+        5. Toss the ingredients gently to mix them evenly.
+        6. Optionally, drizzle with your favorite dressing or add a sprinkle of nuts for extra crunch.
+        7. Serve the salad fresh and enjoy.
+        """;
+    Recipe saladRecipe = new Recipe(new ArrayList<>(), "Salad", saladMethod, 4);
+    saladRecipe.addGrocery("Apple", "kg", 0.5, 32);
+    saladRecipe.addGrocery("Mango", "kg", 0.5, 65);
+    saladRecipe.addGrocery("Salad", "kg", 0.5, 29);
+    cookBook.addRecipe(saladRecipe);
   }
 
   /**
