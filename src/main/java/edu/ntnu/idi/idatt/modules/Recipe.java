@@ -10,9 +10,9 @@ import java.util.NoSuchElementException;
 public class Recipe {
 
   private final ArrayList<Grocery> groceries;
-  private String shortDescription;
-  private String method;
-  private int numberOfPortions;
+  private final String shortDescription;
+  private final String method;
+  private final int numberOfPortions;
 
   /**
    * Constructs a new Recipe.
@@ -92,7 +92,7 @@ public class Recipe {
    */
   public String getMethod() {
     return method;
-  }  //TODO s@rge
+  }
 
   /**
    * Gets the number of portions the recipe yields.
@@ -135,37 +135,6 @@ public class Recipe {
     recipeInformation.append("\nTotal price: ");
     recipeInformation.append(getRecipePrice()).append("kr \n");
     return recipeInformation.toString();
-  }
-
-
-  /**
-   * Updates the short description of the recipe.
-   *
-   * @param shortDescription the new short description
-   */
-  public void setShortDescription(String shortDescription) {
-    this.shortDescription = shortDescription;
-    verifyShortDescription(shortDescription);
-  }
-
-  /**
-   * Updates the method or instructions to prepare the recipe.
-   *
-   * @param method the new method
-   */
-  public void setMethod(String method) {
-    this.method = method;
-    verifyMethod(method);
-  }
-
-  /**
-   * Updates the number of portions the recipe yields.
-   *
-   * @param nrOfPortions the new number of portions
-   */
-  public void setNumberOfPortions(int numberOfPortions) {
-    this.numberOfPortions = numberOfPortions;
-    verifyNumberOfPortions(numberOfPortions);
   }
 
   /**
