@@ -4,11 +4,21 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 /**
- * Represents a recipe with a list of groceries, a short description, a method, and the number of
- * portions.
+ * Represents a recipe with its details.
+ * <p>
+ * The Recipe class represents a recipe which contains a list of groceries, a short description, a
+ * method, and the number of portions the recipe yields. The Recipes created is stored in the
+ * CookBook class
+ *
+ * @author Sindre Larsen Mjøs
+ * @version 2.0
+ * @since 01.11.2024
  */
 public class Recipe {
 
+  /**
+   * Variables
+   */
   private final ArrayList<Grocery> groceries;
   private final String shortDescription;
   private final String method;
@@ -20,9 +30,7 @@ public class Recipe {
    * @param groceries        the list of groceries required for the recipe
    * @param shortDescription a short description of the recipe
    * @param method           the method or instructions to prepare the recipe
-   * @param numberOfPortions the number of nrOfPortions the recipe yields
-   * @throws IllegalArgumentException if any of the parameters are null or nrOfPortions is less than
-   *                                  1
+   * @param numberOfPortions the number of portions the recipe yields
    */
   public Recipe(ArrayList<Grocery> groceries, String shortDescription, String method,
       int numberOfPortions) {
@@ -38,6 +46,11 @@ public class Recipe {
     this.numberOfPortions = numberOfPortions;
   }
 
+  /**
+   * Verifies that the groceries list is not null.
+   *
+   * @param groceries the list of groceries to verify
+   */
   public static void verifyGroceries(ArrayList<Grocery> groceries) {
     if (groceries == null) {
       throw new IllegalArgumentException(
@@ -45,6 +58,11 @@ public class Recipe {
     }
   }
 
+  /**
+   * Verifies that the short description is not empty.
+   *
+   * @param shortDescription the short description to verify
+   */
   public static void verifyShortDescription(String shortDescription) {
     if (shortDescription.isBlank()) {
       throw new IllegalArgumentException(
@@ -52,6 +70,11 @@ public class Recipe {
     }
   }
 
+  /**
+   * Verifies that the method is not empty.
+   *
+   * @param method the method to verify
+   */
   public static void verifyMethod(String method) {
     if (method.isBlank()) {
       throw new IllegalArgumentException(
@@ -59,6 +82,11 @@ public class Recipe {
     }
   }
 
+  /**
+   * Verifies that the number of portions is at least 1.
+   *
+   * @param numberOfPortions the number of portions to verify
+   */
   public static void verifyNumberOfPortions(int numberOfPortions) {
     if (numberOfPortions < 1) {
       throw new IllegalArgumentException(
@@ -141,12 +169,12 @@ public class Recipe {
    * Adds a grocery item to the recipe.
    *
    * @param foodName the name of the food item
-   * @param siUnit   the SI unit of the food item
+   * @param unit     the unit of the food item (kg or l)
    * @param amount   the amount of the food item
    * @param price    the price of the food item
    */
-  public void addGrocery(String foodName, String siUnit, double amount, double price) {
-    groceries.add(new Grocery(foodName, siUnit, amount, price, "11.11.1111"));
+  public void addGrocery(String foodName, String unit, double amount, double price) {
+    groceries.add(new Grocery(foodName, unit, amount, price, "21.02.1848"));
   }
 
   /**
@@ -154,6 +182,7 @@ public class Recipe {
    *
    * @param foodStorage the food storage to check against
    * @return true if all required groceries are available in sufficient amounts, false otherwise
+   * @throws NoSuchElementException if the grocery is not found in the food storage
    */
   public boolean checkFoodStorage(FoodStorage foodStorage) {
     return groceries.stream().allMatch(grocery -> {

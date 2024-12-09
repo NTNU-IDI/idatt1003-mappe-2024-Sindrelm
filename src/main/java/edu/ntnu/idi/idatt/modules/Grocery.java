@@ -7,7 +7,8 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents a grocery item with its details.
  * <p>
- * The class represents a grocery item which will be added to the FoodStorage and or a Recipe.
+ * The class represents a grocery item which will be added to the FoodStorage and or a Recipe. The
+ * class contains the name, unit, amount, price, and expiration expiryDate of the grocery item. The
  *
  * @author Sindre Larsen Mjøs
  * @version 2.0
