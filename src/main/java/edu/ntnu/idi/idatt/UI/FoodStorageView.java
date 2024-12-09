@@ -6,6 +6,10 @@ import edu.ntnu.idi.idatt.modules.Grocery;
 
 /**
  * The view class for interacting with the food storage.
+ *
+ * @author Sindre Larsen Mjøs
+ * @version 2.0
+ * @since 13.11.2024
  */
 public class FoodStorageView {
 

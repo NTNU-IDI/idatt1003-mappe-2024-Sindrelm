@@ -8,6 +8,12 @@ import java.util.ArrayList;
 /**
  * The UserInterface class initializes the food storage and cookbook, and provides a menu for user
  * interaction.
+ * <p>
+ * The class also calls on FoodStorageView and CookBookView to display the respective menus.
+ *
+ * @author Sindre Larsen Mjøs
+ * @version 2.0
+ * @since 13.11.2024
  */
 public class UserInterface {
 
