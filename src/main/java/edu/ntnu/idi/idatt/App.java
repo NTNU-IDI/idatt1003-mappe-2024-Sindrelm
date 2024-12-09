@@ -4,6 +4,13 @@ import edu.ntnu.idi.idatt.UI.UserInterface;
 
 /**
  * The main application class that initializes and starts the user interface.
+ * <p>
+ * main method serves as the entry point of the application. It creates a new UserInterface object
+ * and calls the init() and start() methods on it.
+ *
+ * @author Sindre Larsen Mjøs
+ * @version 2.0
+ * @since 19.10.2024
  */
 public class App {
 
