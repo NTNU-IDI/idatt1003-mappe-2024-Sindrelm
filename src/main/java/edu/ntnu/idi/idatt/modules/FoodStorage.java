@@ -85,9 +85,9 @@ public class FoodStorage {
    * @return the sorted list of grocery items
    */
   public ArrayList<Grocery> getAlphabeticallySortedGroceries() {
-    groceries.sort(Comparator.comparing(
-        Grocery::getName));
-    return groceries;
+    ArrayList<Grocery> sortedGroceries = new ArrayList<>(groceries);
+    sortedGroceries.sort(Comparator.comparing(Grocery::getName));
+    return sortedGroceries;
   }
 
   /**
