@@ -33,6 +33,56 @@ public class FoodStorage {
   }
 
   /**
+   * Gets the index of the grocery item in the storage.
+   *
+   * @param foodName the grocery item to find
+   * @return the index of the grocery item
+   * @throws IllegalArgumentException if the grocery item does not exist
+   */
+  public int getGroceryIndex(String foodName) {
+    for (int groceryIndex = 0; groceryIndex < groceries.size(); groceryIndex++) {
+      if (groceries.get(groceryIndex).getFoodName().equals(foodName)) {
+        return groceryIndex;
+      }
+    }
+    throw new NoSuchElementException("Grocery does not exist");
+  }
+
+  /**
+   * Gets a list of grocery items that have expired.
+   *
+   * @return a list of grocery items that have expired
+   */
+  public ArrayList<Grocery> getExpiredGroceries() {
+    return groceries.stream()
+        .filter(Grocery::isExpired)
+        .collect(Collectors.toCollection(ArrayList::new));
+  }
+
+  /**
+   * Gets a list of grocery items that expire before the specified date.
+   *
+   * @param date the date to compare with
+   * @return a list of grocery items that expire before the specified date
+   */
+  public ArrayList<Grocery> getGroceriesExpiringBefore(String date) {
+    return groceries.stream()
+        .filter(grocery -> grocery.expireBefore(date))
+        .collect(Collectors.toCollection(ArrayList::new));
+  }
+
+  /**
+   * Sorts the groceries list alphabetically by their food name and returns the sorted list.
+   *
+   * @return the sorted list of grocery items
+   */
+  public ArrayList<Grocery> getAlphabeticallySortedGroceries() {
+    groceries.sort(Comparator.comparing(
+        Grocery::getFoodName));
+    return groceries;
+  }
+
+  /**
    * Adds a grocery item to the storage. If the grocery item already exists, it adds the specified
    * amount to the existing item.
    *
@@ -92,55 +142,5 @@ public class FoodStorage {
       }
     }
     return false;
-  }
-
-  /**
-   * Gets the index of the grocery item in the storage.
-   *
-   * @param foodName the grocery item to find
-   * @return the index of the grocery item
-   * @throws IllegalArgumentException if the grocery item does not exist
-   */
-  public int getGroceryIndex(String foodName) {
-    for (int groceryIndex = 0; groceryIndex < groceries.size(); groceryIndex++) {
-      if (groceries.get(groceryIndex).getFoodName().equals(foodName)) {
-        return groceryIndex;
-      }
-    }
-    throw new NoSuchElementException("Grocery does not exist");
-  }
-
-  /**
-   * Gets a list of grocery items that have expired.
-   *
-   * @return a list of grocery items that have expired
-   */
-  public ArrayList<Grocery> getExpiredGroceries() {
-    return groceries.stream()
-        .filter(Grocery::isExpired)
-        .collect(Collectors.toCollection(ArrayList::new));
-  }
-
-  /**
-   * Gets a list of grocery items that expire before the specified date.
-   *
-   * @param date the date to compare with
-   * @return a list of grocery items that expire before the specified date
-   */
-  public ArrayList<Grocery> getGroceriesExpiringBefore(String date) {
-    return groceries.stream()
-        .filter(grocery -> grocery.expireBefore(date))
-        .collect(Collectors.toCollection(ArrayList::new));
-  }
-
-  /**
-   * Sorts the groceries list alphabetically by their food name and returns the sorted list.
-   *
-   * @return the sorted list of grocery items
-   */
-  public ArrayList<Grocery> getAlphabeticallySortedGroceries() {
-    groceries.sort(Comparator.comparing(
-        Grocery::getFoodName));
-    return groceries;
   }
 }
