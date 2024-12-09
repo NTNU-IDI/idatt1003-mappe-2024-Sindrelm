@@ -3,7 +3,6 @@ package edu.ntnu.idi.idatt.UI;
 import static edu.ntnu.idi.idatt.UI.UserInterface.foodStorage;
 
 import edu.ntnu.idi.idatt.modules.Grocery;
-import java.text.ParseException;
 
 /**
  * The view class for interacting with the food storage.
@@ -12,10 +11,8 @@ public class FoodStorageView {
 
   /**
    * Displays the menu for the food storage and handles user input.
-   *
-   * @throws ParseException if there is an error during parsing
    */
-  public static void menu() throws ParseException {
+  public static void menu() {
     boolean runFoodStorageMenu = true;
     while (runFoodStorageMenu) {
       System.out.print("""
@@ -96,12 +93,10 @@ public class FoodStorageView {
             System.out.println(e.getMessage());
           }
         }
-        case 4 -> {
-          foodStorage.getAlphabeticallySortedGroceries().forEach(System.out::println);
-        }
-        case 5 -> {
-          foodStorage.getExpiredGroceries().forEach(System.out::println);
-        }
+        case 4 -> foodStorage.getAlphabeticallySortedGroceries().forEach(System.out::println);
+
+        case 5 -> foodStorage.getExpiredGroceries().forEach(System.out::println);
+
         case 6 -> {
           try {
             System.out.println("Enter date to check before(DD.MM.YYYY):");
@@ -113,7 +108,6 @@ public class FoodStorageView {
             System.out.println(e.getMessage());
           }
         }
-        default -> System.out.println("Invalid input");
       }
     }
   }

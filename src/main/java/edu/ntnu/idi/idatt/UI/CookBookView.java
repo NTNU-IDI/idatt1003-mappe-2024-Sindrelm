@@ -93,9 +93,8 @@ public class CookBookView {
             System.out.println(e.getMessage());
           }
         }
-        case 2 -> {
-          System.out.println(cookBook.getCookBookRegister());
-        }
+        case 2 -> System.out.println(cookBook.getCookBookRegister());
+
         case 3 -> {
           try {
             System.out.println("Enter the name of the recipe to open:");
@@ -105,9 +104,7 @@ public class CookBookView {
             System.out.println(e.getMessage());
           }
         }
-        case 4 -> {
-          System.out.println(cookBook.getRecipeSuggestions(foodStorage));
-        }
+        case 4 -> System.out.println(cookBook.getRecipeSuggestions(foodStorage));
       }
     }
   }
