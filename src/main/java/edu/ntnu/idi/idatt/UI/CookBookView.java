@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt.UI;
 import static edu.ntnu.idi.idatt.UI.UserInterface.cookBook;
 import static edu.ntnu.idi.idatt.UI.UserInterface.foodStorage;
 
+import edu.ntnu.idi.idatt.modules.Grocery;
 import edu.ntnu.idi.idatt.modules.Recipe;
 import java.util.ArrayList;
 
@@ -43,31 +44,46 @@ public class CookBookView {
         case 1 -> {
           try {
             System.out.println("Enter name of recipe:");
-            String name = System.console().readLine();
-            System.out.println("Enter description of recipe:");
-            String description = System.console().readLine();
-            System.out.println("Enter number of servings:");
-            int servings = Integer.parseInt(System.console().readLine());
+            String shortDescription = System.console().readLine();
+            Recipe.verifyShortDescription(shortDescription);
 
-            Recipe recipe = new Recipe(new ArrayList<>(), name, description, servings);
+            System.out.println("Enter description of recipe:");
+            String method = System.console().readLine();
+            Recipe.verifyMethod(method);
+
+            System.out.println("Enter number of servings:");
+            int numberOfPortions = Integer.parseInt(System.console().readLine());
+            Recipe.verifyNumberOfPortions(numberOfPortions);
+
+            Recipe recipe = new Recipe(new ArrayList<>(), shortDescription, method,
+                numberOfPortions);
+
             System.out.print("Enter the number of ingredients:");
             int numberOfIngredients = Integer.parseInt(System.console().readLine());
             if (numberOfIngredients <= 0) {
               throw new IllegalArgumentException(
-                  "Number of ingredients must be greater than 0"); //TODO flytte exception handling til Recipe
+                  "Number of ingredients must be greater than 0");
             }
 
             int i = 1;
             while (i < numberOfIngredients + 1) {
               System.out.println("Enter the name of the " + i + ". ingredient:");
-              String foodName = System.console().readLine();
-              System.out.println("Enter the siUnit of the  " + i + ". ingredient(l or kg):");
-              String siUnit = System.console().readLine();
+              String name = System.console().readLine();
+              Grocery.verifyName(name);
+
+              System.out.println("Enter the unit of the  " + i + ". ingredient(l or kg):");
+              String unit = System.console().readLine();
+              Grocery.verifyUnit(unit);
+
               System.out.println("Enter the amount of the " + i + ". ingredient:");
               double amount = Double.parseDouble(System.console().readLine());
+              Grocery.verifyAmount(amount);
+
               System.out.println("Enter the price per/kg for the " + i + ". ingredient:");
               double price = Double.parseDouble(System.console().readLine());
-              recipe.addGrocery(foodName, siUnit, amount, price);
+              Grocery.verifyPrice(price);
+
+              recipe.addGrocery(name, unit, amount, price);
               i++;
             }
 
@@ -83,8 +99,8 @@ public class CookBookView {
         case 3 -> {
           try {
             System.out.println("Enter the name of the recipe to open:");
-            String recipeName = System.console().readLine();
-            System.out.println(cookBook.getRecipe(recipeName).getRecipeInformation());
+            String name = System.console().readLine();
+            System.out.println(cookBook.getRecipe(name).getRecipeInformation());
           } catch (Exception e) {
             System.out.println(e.getMessage());
           }

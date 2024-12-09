@@ -12,7 +12,7 @@ public class Recipe {
   private final ArrayList<Grocery> groceries;
   private String shortDescription;
   private String method;
-  private int nrOfPortions;
+  private int numberOfPortions;
 
   /**
    * Constructs a new Recipe.
@@ -20,47 +20,47 @@ public class Recipe {
    * @param groceries        the list of groceries required for the recipe
    * @param shortDescription a short description of the recipe
    * @param method           the method or instructions to prepare the recipe
-   * @param nrOfPortions     the number of nrOfPortions the recipe yields
+   * @param numberOfPortions the number of nrOfPortions the recipe yields
    * @throws IllegalArgumentException if any of the parameters are null or nrOfPortions is less than
    *                                  1
    */
   public Recipe(ArrayList<Grocery> groceries, String shortDescription, String method,
-      int nrOfPortions) {
+      int numberOfPortions) {
+
+    verifyGroceries(groceries);
+    verifyShortDescription(shortDescription);
+    verifyMethod(method);
+    verifyNumberOfPortions(numberOfPortions);
 
     this.groceries = groceries;
     this.shortDescription = shortDescription;
     this.method = method;
-    this.nrOfPortions = nrOfPortions;
-
-    verifyGroceries();
-    verifyShortDescription();
-    verifyMethod();
-    verifyNrOfPortions();
+    this.numberOfPortions = numberOfPortions;
   }
 
-  private void verifyGroceries() {
-    if (this.groceries == null) {
+  public static void verifyGroceries(ArrayList<Grocery> groceries) {
+    if (groceries == null) {
       throw new IllegalArgumentException(
           "Groceries can not be null");
     }
   }
 
-  private void verifyShortDescription() {
-    if (this.shortDescription.isBlank()) {
+  public static void verifyShortDescription(String shortDescription) {
+    if (shortDescription.isBlank()) {
       throw new IllegalArgumentException(
           "Short description can not be empty");
     }
   }
 
-  private void verifyMethod() {
-    if (this.method.isBlank()) {
+  public static void verifyMethod(String method) {
+    if (method.isBlank()) {
       throw new IllegalArgumentException(
           "Method can not be empty");
     }
   }
 
-  private void verifyNrOfPortions() {
-    if (this.nrOfPortions < 1) {
+  public static void verifyNumberOfPortions(int numberOfPortions) {
+    if (numberOfPortions < 1) {
       throw new IllegalArgumentException(
           "Number of portions must be at least 1");
     }
@@ -100,7 +100,7 @@ public class Recipe {
    * @return the number of portions
    */
   public int getNumberOfPortions() {
-    return nrOfPortions;
+    return numberOfPortions;
   }
 
   /**
@@ -124,7 +124,7 @@ public class Recipe {
     StringBuilder recipeInformation = new StringBuilder();
     recipeInformation.append("Recipe: ").append(shortDescription).append("\n");
     recipeInformation.append("Method: ").append(method).append("\n");
-    recipeInformation.append("Number of portions: ").append(nrOfPortions).append("\n \n");
+    recipeInformation.append("Number of portions: ").append(numberOfPortions).append("\n \n");
     recipeInformation.append("Groceries: \n");
     for (Grocery grocery : groceries) {
       recipeInformation.append(grocery.getFoodName()).append(", ");
@@ -145,7 +145,7 @@ public class Recipe {
    */
   public void setShortDescription(String shortDescription) {
     this.shortDescription = shortDescription;
-    verifyShortDescription();
+    verifyShortDescription(shortDescription);
   }
 
   /**
@@ -155,7 +155,7 @@ public class Recipe {
    */
   public void setMethod(String method) {
     this.method = method;
-    verifyMethod();
+    verifyMethod(method);
   }
 
   /**
@@ -163,9 +163,9 @@ public class Recipe {
    *
    * @param nrOfPortions the new number of portions
    */
-  public void setNumberOfPortions(int nrOfPortions) {
-    this.nrOfPortions = nrOfPortions;
-    verifyNrOfPortions();
+  public void setNumberOfPortions(int numberOfPortions) {
+    this.numberOfPortions = numberOfPortions;
+    verifyNumberOfPortions(numberOfPortions);
   }
 
   /**
