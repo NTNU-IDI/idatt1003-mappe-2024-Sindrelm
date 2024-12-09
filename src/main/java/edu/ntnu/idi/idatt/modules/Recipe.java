@@ -123,6 +123,29 @@ public class Recipe {
   }
 
   /**
+   * Returns the method spread out on multiple lines with a fixed line length of 50 characters.
+   *
+   * @return the formatted method
+   */
+  public String getFormattedMethod() {
+    int lineLength = 50;
+    StringBuilder formattedMethod = new StringBuilder();
+    String[] words = method.split(" ");
+    int currentLineLength = 0;
+
+    for (String word : words) {
+      if (currentLineLength + word.length() > lineLength) {
+        formattedMethod.append("\n");
+        currentLineLength = 0;
+      }
+      formattedMethod.append(word).append(" ");
+      currentLineLength += word.length() + 1;
+    }
+
+    return formattedMethod.toString().trim();
+  }
+
+  /**
    * Gets the number of portions the recipe yields.
    *
    * @return the number of portions
@@ -151,7 +174,7 @@ public class Recipe {
   public String getRecipeInformation() {
     StringBuilder recipeInformation = new StringBuilder();
     recipeInformation.append("Recipe: ").append(shortDescription).append("\n");
-    recipeInformation.append("Method: ").append(method).append("\n");
+    recipeInformation.append("Method: ").append(getFormattedMethod()).append("\n");
     recipeInformation.append("Number of portions: ").append(numberOfPortions).append("\n \n");
     recipeInformation.append("Groceries: \n");
     for (Grocery grocery : groceries) {
