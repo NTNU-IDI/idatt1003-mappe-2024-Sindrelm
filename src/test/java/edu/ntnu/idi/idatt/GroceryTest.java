@@ -2,13 +2,12 @@ package edu.ntnu.idi.idatt;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.ntnu.idi.idatt.modules.Grocery;
-import java.time.LocalDate;
 import java.text.ParseException;
-
+import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -75,9 +74,9 @@ class GroceryTest {
    * Tests the getFoodName method.
    */
   @Test
-  void getFoodName() {
+  void getName() {
     Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    String foodName = grocery.getFoodName();
+    String foodName = grocery.getName();
     assertEquals(foodName, "Apple");
   }
 

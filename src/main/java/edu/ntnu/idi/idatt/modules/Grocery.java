@@ -6,27 +6,36 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Represents a grocery item with its details.
+ * <p>
+ * The class represents a grocery item which will be added to the FoodStorage and or a Recipe.
+ *
+ * @author Sindre Larsen Mjøs
+ * @version 2.0
+ * @since 19.10.2024
  */
 public class Grocery {
 
-  // Variables
-  private final String foodName;
+  public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+  /**
+   * Variables
+   */
+  private final String name;
   private final String unit;
   private final double price;
   private final LocalDate expirationDate;
   private double amount;
-  public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
   /**
    * Constructs a new Grocery item.
    *
-   * @param foodName       the name of the food item
+   * @param name           the name of the food item
    * @param unit           the SI unit of the food item (kg or l)
    * @param amount         the amount of the food item
    * @param price          the price of the food item in kr/kg or kr/l
    * @param expirationDate the expiration expiryDate of the food item
    */
-  public Grocery(String foodName, String unit, double amount, double price,
+  public Grocery(String name, String unit, double amount, double price,
       String expirationDate) {
 
     try {
@@ -36,23 +45,35 @@ public class Grocery {
       throw new IllegalArgumentException("Expiration date must be in the format DD.MM.YYYY", e);
     }
 
-    verifyName(foodName);
+    verifyName(name);
     verifyAmount(amount);
     verifyPrice(price);
     verifyUnit(unit);
 
-    this.foodName = foodName;
+    this.name = name;
     this.unit = unit;
     this.amount = amount;
     this.price = price;
   }
 
-  public static void verifyName(String foodName) {
-    if (foodName == null || foodName.trim().isEmpty()) {
+  /**
+   * Verifies if a given food name is valid
+   *
+   * @param name the name to be verified
+   * @throws IllegalArgumentException if the name is null or empty
+   */
+  public static void verifyName(String name) {
+    if (name == null || name.trim().isEmpty()) {
       throw new IllegalArgumentException("Food name must be non-null");
     }
   }
 
+  /**
+   * Verifies if a given expiration date is valid
+   *
+   * @param expirationDate the expiration date to be verified
+   * @throws IllegalArgumentException if the expiration date is null or empty
+   */
   public static void verifyExpirationDate(String expirationDate) {
     try {
       LocalDate.parse(expirationDate, formatter);
@@ -61,23 +82,40 @@ public class Grocery {
     }
   }
 
+  /**
+   * Verifies if a given amount is valid
+   *
+   * @param amount the amount to be verified
+   * @throws IllegalArgumentException if the amount is negative
+   */
   public static void verifyAmount(double amount) {
     if (amount < 0) {
       throw new IllegalArgumentException("Amount must be a positive number");
     }
   }
 
+  /**
+   * Verifies if a given price is valid
+   *
+   * @param price the price to be verified
+   * @throws IllegalArgumentException if the price is negative or zero
+   */
   public static void verifyPrice(double price) {
-    if (price < 0) {
+    if (price <= 0) {
       throw new IllegalArgumentException("Price must be a positive number");
     }
-
   }
 
+  /**
+   * Verifies if a given unit is valid
+   *
+   * @param unit the unit to be verified
+   * @throws IllegalArgumentException if the unit is not kg or l
+   */
   public static void verifyUnit(String unit) {
     if (!("kg").equals(unit) && !("l").equals(unit)) {
       throw new IllegalArgumentException(
-          "SI unit must be kg or l"); // potensielt endre til enum eller set og kanskje ha med pieces eller noe sånt
+          "SI unit must be kg or l");
     }
   }
 
@@ -87,12 +125,12 @@ public class Grocery {
    *
    * @return the name of the food item
    */
-  public String getFoodName() {
-    return foodName;
+  public String getName() {
+    return name;
   }
 
   /**
-   * Gets the SI unit of the food item.
+   * Gets the unit of the food item.
    *
    * @return the SI unit of the food item
    */
@@ -110,9 +148,9 @@ public class Grocery {
   }
 
   /**
-   * Gets the price of the food item.
+   * Gets the total price of the food item.
    *
-   * @return the price of the food item
+   * @return the total price of the food item
    */
   public double getTotalPrice() {
     return price * amount;
@@ -131,6 +169,7 @@ public class Grocery {
    * Adds the specified amount to the current amount of the food item.
    *
    * @param amount the amount to be added to the current amount
+   * @throws IllegalArgumentException if the amount is negative or zero
    */
   public void addAmount(double amount) {
     if (amount <= 0) {
@@ -143,6 +182,7 @@ public class Grocery {
    * Removes the specified amount to the current amount of the food item.
    *
    * @param amount the amount to be Removed from the current amount
+   * @throws IllegalArgumentException if the amount is negative or zero
    */
   public void removeAmount(double amount) {
     if (amount <= 0) {
@@ -188,7 +228,7 @@ public class Grocery {
    */
   public String toString() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-    return foodName + ", " + amount + " " + unit + ", " + expirationDate.format(
+    return name + ", " + amount + " " + unit + ", " + expirationDate.format(
         formatter);
   }
 }

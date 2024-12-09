@@ -65,7 +65,7 @@ public class FoodStorageTest {
   void testGetGrocery() {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
     foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    assertEquals("Apple", foodStorage.getGrocery("Apple").getFoodName());
+    assertEquals("Apple", foodStorage.getGrocery("Apple").getName());
   }
 
   /**
@@ -173,6 +173,6 @@ public class FoodStorageTest {
     FoodStorage foodStorage = new FoodStorage(new ArrayList<Grocery>());
     foodStorage.addGrocery("Banana", "kg", 1.0, 10.0, "19.02.2024");
     foodStorage.addGrocery("Apple", "kg", 1.0, 10.0, "19.02.2024");
-    assertEquals("Apple", foodStorage.getAlphabeticallySortedGroceries().get(0).getFoodName());
+    assertEquals("Apple", foodStorage.getAlphabeticallySortedGroceries().get(0).getName());
   }
 }

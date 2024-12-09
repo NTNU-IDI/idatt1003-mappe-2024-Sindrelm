@@ -41,7 +41,7 @@ public class FoodStorage {
    */
   public int getGroceryIndex(String foodName) {
     for (int groceryIndex = 0; groceryIndex < groceries.size(); groceryIndex++) {
-      if (groceries.get(groceryIndex).getFoodName().equals(foodName)) {
+      if (groceries.get(groceryIndex).getName().equals(foodName)) {
         return groceryIndex;
       }
     }
@@ -78,7 +78,7 @@ public class FoodStorage {
    */
   public ArrayList<Grocery> getAlphabeticallySortedGroceries() {
     groceries.sort(Comparator.comparing(
-        Grocery::getFoodName));
+        Grocery::getName));
     return groceries;
   }
 
@@ -137,7 +137,7 @@ public class FoodStorage {
    */
   public boolean groceryExists(String foodName) {
     for (Grocery grocery : groceries) {
-      if (foodName.equals(grocery.getFoodName())) {
+      if (foodName.equals(grocery.getName())) {
         return true;
       }
     }

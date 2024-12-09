@@ -127,7 +127,7 @@ public class Recipe {
     recipeInformation.append("Number of portions: ").append(numberOfPortions).append("\n \n");
     recipeInformation.append("Groceries: \n");
     for (Grocery grocery : groceries) {
-      recipeInformation.append(grocery.getFoodName()).append(", ");
+      recipeInformation.append(grocery.getName()).append(", ");
       recipeInformation.append(grocery.getAmount());
       recipeInformation.append(grocery.getUnit()).append(", ");
       recipeInformation.append(grocery.getTotalPrice()).append("kr \n");
@@ -158,7 +158,7 @@ public class Recipe {
   public boolean checkFoodStorage(FoodStorage foodStorage) {
     return groceries.stream().allMatch(grocery -> {
       try {
-        return foodStorage.getGrocery(grocery.getFoodName()).getAmount() >= grocery.getAmount();
+        return foodStorage.getGrocery(grocery.getName()).getAmount() >= grocery.getAmount();
       } catch (NoSuchElementException e) {
         return false;
       }
