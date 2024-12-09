@@ -1,6 +1,5 @@
 package edu.ntnu.idi.idatt.modules;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
@@ -37,18 +36,18 @@ public class FoodStorage {
    * Adds a grocery item to the storage. If the grocery item already exists, it adds the specified
    * amount to the existing item.
    *
-   * @param foodName       the name of the food item to add
-   * @param siUnit         the SI unit of the food item
+   * @param name           the name of the food item to add
+   * @param unit           the SI unit of the food item
    * @param amount         the amount of the food item
    * @param price          the price of the food item
    * @param expirationDate the expiration expirationDate of the food item
    */
-  public void addGrocery(String foodName, String siUnit, double amount, double price,
+  public void addGrocery(String name, String unit, double amount, double price,
       String expirationDate) {
-    if (!groceryExists(foodName)) {
-      groceries.add(new Grocery(foodName, siUnit, amount, price, expirationDate));
+    if (!groceryExists(name)) {
+      groceries.add(new Grocery(name, unit, amount, price, expirationDate));
     } else {
-      int groceryIndex = getGroceryIndex(foodName);
+      int groceryIndex = getGroceryIndex(name);
       groceries.get(groceryIndex).addAmount(amount);
     }
   }
@@ -56,11 +55,11 @@ public class FoodStorage {
   /**
    * Removes a grocery item from the storage by its food name.
    *
-   * @param foodName the name of the food item to remove
+   * @param name of the food item to remove
    * @throws IllegalArgumentException if the grocery item does not exist
    */
-  public void removeGrocery(String foodName) {
-    int groceryIndex = getGroceryIndex(foodName);
+  public void removeGrocery(String name) {
+    int groceryIndex = getGroceryIndex(name);
     groceries.remove(groceryIndex);
   }
 
@@ -68,15 +67,15 @@ public class FoodStorage {
    * Removes a specified amount of a grocery item from the storage. If the resulting amount is less
    * than or equal to zero, the grocery item is removed from the storage.
    *
-   * @param foodName the name of the food item to remove
-   * @param amount   the amount of the food item to remove
+   * @param name   the name of the food item to remove
+   * @param amount the amount of the food item to remove
    * @throws IllegalArgumentException if the grocery item does not exist
    */
-  public void removeGroceryAmount(String foodName, double amount) {
-    Grocery grocery = getGrocery(foodName);
+  public void removeGroceryAmount(String name, double amount) {
+    Grocery grocery = getGrocery(name);
     grocery.removeAmount(amount);
     if (grocery.getAmount() == 0) {
-      removeGrocery(foodName);
+      removeGrocery(name);
     }
   }
 
@@ -86,7 +85,7 @@ public class FoodStorage {
    * @param foodName the name of the food item to check
    * @return true if the grocery item exists, false otherwise
    */
-  public boolean groceryExists(String foodName) { //TODO Kan bruke getGroceryIndex her kanskje??
+  public boolean groceryExists(String foodName) {
     for (Grocery grocery : groceries) {
       if (foodName.equals(grocery.getFoodName())) {
         return true;
@@ -127,10 +126,8 @@ public class FoodStorage {
    *
    * @param date the date to compare with
    * @return a list of grocery items that expire before the specified date
-   * @throws ParseException if the date is not in the correct format
    */
-
-  public ArrayList<Grocery> getGroceriesExpiringBefore(String date) throws ParseException {
+  public ArrayList<Grocery> getGroceriesExpiringBefore(String date) {
     return groceries.stream()
         .filter(grocery -> grocery.expireBefore(date))
         .collect(Collectors.toCollection(ArrayList::new));
