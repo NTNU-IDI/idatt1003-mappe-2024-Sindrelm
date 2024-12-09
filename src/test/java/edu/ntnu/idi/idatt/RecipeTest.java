@@ -9,86 +9,126 @@ import edu.ntnu.idi.idatt.modules.FoodStorage;
 import edu.ntnu.idi.idatt.modules.Grocery;
 import edu.ntnu.idi.idatt.modules.Recipe;
 import java.util.ArrayList;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test class for the Recipe class.
  */
-public class RecipeTest {
+class RecipeTest {
 
-  /**
-   * Tests that an exception is thrown when creating a Recipe with a null grocery list.
-   */
-  @Test
-  void testRecipeThrowsException() {
-    assertThrows(IllegalArgumentException.class,
-        () -> new Recipe(null, "shortDescription", "method", 1));
+  private static Recipe pancakeRecipe;
+  private static FoodStorage foodStorage;
+
+  @BeforeAll
+  static void setUp() {
+    ArrayList<Grocery> groceries = new ArrayList<>();
+    groceries.add(new Grocery("Flour", "kg", 1.0, 20.0, "20.12.2024"));
+    groceries.add(new Grocery("Milk", "l", 1.0, 15.0, "20.12.2024"));
+    groceries.add(new Grocery("Eggs", "kg", 0.5, 50, "20.12.2024"));
+
+    pancakeRecipe = new Recipe(groceries, "Pancakes", "Mix all ingredients and fry.", 4);
+
+    foodStorage = new FoodStorage(new ArrayList<Grocery>());
+    foodStorage.addGrocery("Flour", "kg", 1.0, 20.0, "20.12.2024");
+    foodStorage.addGrocery("Milk", "l", 1.0, 15.0, "20.12.2024");
+    foodStorage.addGrocery("Eggs", "kg", 0.5, 50, "20.12.2024");
+
   }
 
-  /**
-   * Tests the getRecipePrice method.
-   */
+  @Test
+  void testConstructorWithNullGroceries() {
+    // Assert
+    assertThrows(IllegalArgumentException.class,
+        () -> new Recipe(null, "Pancakes", "Mix all ingredients and fry.", 4));
+  }
+
+  @Test
+  void testConstructorWithEmptyShortDescription() {
+    // Assert
+    assertThrows(IllegalArgumentException.class,
+        () -> new Recipe(pancakeRecipe.getGroceries(), "", "Mix all ingredients and fry.", 4));
+  }
+
+  @Test
+  void testConstructorWithInvalidNumberOfPortions() {
+    // Assert
+    assertThrows(IllegalArgumentException.class,
+        () -> new Recipe(pancakeRecipe.getGroceries(), "Pancakes", "Mix all ingredients and fry.",
+            0));
+  }
+
+  @Test
+  void testConstructorWithNullMethod() {
+    // Assert
+    assertThrows(NullPointerException.class,
+        () -> new Recipe(pancakeRecipe.getGroceries(), "Pancakes", null, 4));
+  }
+
+  @Test
+  void testGetGroceries() {
+    // Act
+    int groceryCount = pancakeRecipe.getGroceries().size();
+    // Assert
+    assertEquals(3, groceryCount);
+  }
+
+  @Test
+  void testGetShortDescription() {
+    // Act
+    String description = pancakeRecipe.getShortDescription();
+    // Assert
+    assertEquals("Pancakes", description);
+  }
+
+  @Test
+  void testGetMethod() {
+    // Act
+    String method = pancakeRecipe.getMethod();
+    // Assert
+    assertEquals("Mix all ingredients and fry.", method);
+  }
+
+  @Test
+  void testGetNumberOfPortions() {
+    // Act
+    int portions = pancakeRecipe.getNumberOfPortions();
+    // Assert
+    assertEquals(4, portions);
+  }
+
   @Test
   void testGetRecipePrice() {
-    Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
-    Grocery grocery = new Grocery("apple", "kg", 1.0, 1.0, "01.01.2021");
-    recipe.addGrocery("apple", "kg", 1.0, 1.0);
-    assertEquals(recipe.getRecipePrice(), 1.0);
+    // Act
+    double recipePrice = pancakeRecipe.getRecipePrice();
+    // Assert
+    assertEquals(20.0 + 15.0 + (0.5 * 50), recipePrice);
   }
 
-  /**
-   * Tests the addGrocery method.
-   */
   @Test
   void testAddGrocery() {
-    Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
-    recipe.addGrocery("apple", "kg", 1.0, 1.0);
-    assertEquals(recipe.getGroceries().size(), 1);
+    // Act
+    pancakeRecipe.addGrocery("Sugar", "kg", 0.5, 10.0);
+    int groceryCount = pancakeRecipe.getGroceries().size();
+    // Assert
+    assertEquals(4, groceryCount);
   }
 
   @Test
-  void testAddGroceryThrowsException() {
-    Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
-    assertThrows(IllegalArgumentException.class, () -> recipe.addGrocery(null, "kg", 1.0, 1.0));
-    assertThrows(IllegalArgumentException.class, () -> recipe.addGrocery("apple", null, 1.0, 1.0));
-    assertThrows(IllegalArgumentException.class, () -> recipe.addGrocery("apple", "kg", -1.0, 1.0));
-    assertThrows(IllegalArgumentException.class, () -> recipe.addGrocery("apple", "kg", 1.0, -1.0));
+  void testCheckFoodStorage() {
+    // Act
+    boolean isFoodStorage = pancakeRecipe.checkFoodStorage(foodStorage);
+    // Assert
+    assertTrue(isFoodStorage);
   }
 
-  /**
-   * Tests the checkFoodStorage method when the food storage contains the required groceries.
-   */
   @Test
-  void testCheckFoodStorageTrue() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<>());
-    foodStorage.addGrocery("apple", "kg", 1.0, 1.0, "01.01.2021");
-    Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
-    recipe.addGrocery("apple", "kg", 1.0, 1.0);
-    assertTrue(recipe.checkFoodStorage(foodStorage));
-  }
-
-  /**
-   * Tests the checkFoodStorage method when the food storage does not contain enough of the required
-   * groceries.
-   */
-  @Test
-  void testCheckFoodStorageFalse() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<>());
-    foodStorage.addGrocery("apple", "kg", 1.0, 1.0, "01.01.2021");
-    Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
-    recipe.addGrocery("apple", "kg", 2.0, 1.0);
-    assertFalse(recipe.checkFoodStorage(foodStorage));
-  }
-
-  /**
-   * Tests the checkFoodStorage method when the food storage does not contain the required
-   * groceries.
-   */
-  @Test
-  void testCheckFoodStorageForNonExistingGrocery() {
-    FoodStorage foodStorage = new FoodStorage(new ArrayList<>());
-    Recipe recipe = new Recipe(new ArrayList<>(), "shortDescription", "method", 1);
-    recipe.addGrocery("apple", "kg", 1.0, 1.0);
-    assertFalse(recipe.checkFoodStorage(foodStorage));
+  void testCheckFoodStorageWithMissingGrocery() {
+    // Arrange
+    foodStorage.removeGrocery("Flour");
+    // Act
+    boolean isFoodStorage = pancakeRecipe.checkFoodStorage(foodStorage);
+    // Assert
+    assertFalse(isFoodStorage);
   }
 }

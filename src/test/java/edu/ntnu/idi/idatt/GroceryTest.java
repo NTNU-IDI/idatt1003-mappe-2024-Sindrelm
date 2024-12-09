@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.ntnu.idi.idatt.modules.Grocery;
-import java.text.ParseException;
 import java.time.LocalDate;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -15,140 +15,193 @@ import org.junit.jupiter.api.Test;
  */
 class GroceryTest {
 
-  /**
-   * Tests the getPrice method.
-   */
-  @Test
-  void getTotalPrice() {
-    Grocery grocery = new Grocery("Apple", "kg", 2.0, 10.0, "19.02.2004");
-    double price = grocery.getTotalPrice();
-    assertEquals(price, 20.0);
+  private static Grocery milk;
+  private static Grocery bread;
+  private static Grocery cheese;
+
+  @BeforeAll
+  static void setUp() {
+    milk = new Grocery("Milk", "l", 1, 20, "19.02.2025");
+    bread = new Grocery("Bread", "kg", 1, 10, "19.02.2024");
+    cheese = new Grocery("Cheese", "kg", 1, 30, "19.02.2026");
   }
 
-  /**
-   * Tests that an exception is thrown for an invalid SI unit.
-   */
   @Test
-  void wrongSiUnit() {
+  void testBlankName() {
+    //assert
+    assertThrows(IllegalArgumentException.class, () -> new Grocery("", "l", 1, 20, "19.02.2025"));
+  }
+
+  @Test
+  void testInvalidExpirationDate() {
+    //assert
     assertThrows(IllegalArgumentException.class,
-        () -> new Grocery("Apple", "mg", 1.0, 10.0, "11.11.1111"));
+        () -> new Grocery("Milk", "l", 1, 20, "1902.2025"));
   }
 
-  /**
-   * Tests that an exception is thrown for a null food name.
-   */
   @Test
-  void nullFoodName() {
+  void testNegativeAmount() {
+    //assert
     assertThrows(IllegalArgumentException.class,
-        () -> new Grocery(null, "kg", 1.0, 10.0, "11.11.1111"));
+        () -> new Grocery("Milk", "l", -1, 20, "19.02.2025"));
   }
 
-  /**
-   * Tests that an exception is thrown for a null SI unit.
-   */
   @Test
-  void nullSiUnit() {
+  void testNegativePrice() {
+    //assert
     assertThrows(IllegalArgumentException.class,
-        () -> new Grocery("Apple", null, 1.0, 10.0, "11.11.1111"));
+        () -> new Grocery("Milk", "l", 1, -20, "19.02.2025"));
   }
 
   @Test
-  void testDateDoesNotMatchPattern() {
+  void testInvalidUnit() {
+    //assert
     assertThrows(IllegalArgumentException.class,
-        () -> new Grocery("Apple", "kg", 1.0, 10.0, "19-02-2004"));
+        () -> new Grocery("Milk", "litter", 1, 20, "19.02.2025"));
   }
 
   @Test
-  void negativeAmount() {
+  void testInvalidDate() {
+    //assert
     assertThrows(IllegalArgumentException.class,
-        () -> new Grocery("Apple", "kg", -1.0, 10.0, "19.02.2004"));
+        () -> new Grocery("Milk", "l", 1, 20, "19.02/2025"));
   }
 
   @Test
-  void negativePrice() {
-    assertThrows(IllegalArgumentException.class,
-        () -> new Grocery("Apple", "kg", 1.0, -10.0, "19.02.2004"));
+  void testGetName() {
+    //arrange
+    setUp();
+    //act
+    String name = milk.getName();
+    //assert
+    assertEquals("Milk", name);
   }
 
-  /**
-   * Tests the getFoodName method.
-   */
   @Test
-  void getName() {
-    Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    String foodName = grocery.getName();
-    assertEquals(foodName, "Apple");
+  void testGetUnit() {
+    //arrange
+    setUp();
+    //act
+    String unit = cheese.getUnit();
+    //assert
+    assertEquals("kg", unit);
   }
 
-  /**
-   * Tests the getUnit method.
-   */
   @Test
-  void getUnit() {
-    Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    String unit = grocery.getUnit();
-    assertEquals(unit, "kg");
+  void testGetAmount() {
+    //arrange
+    setUp();
+    //act
+    double amount = bread.getAmount();
+    //assert
+    assertEquals(1, amount);
   }
 
-  /**
-   * Tests the getAmount method.
-   */
   @Test
-  void getAmount() {
-    Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    double amount = grocery.getAmount();
-    assertEquals(amount, 1.0);
+  void testGetTotalPrice() {
+    //arrange
+    setUp();
+    //act
+    double totalPrice = milk.getTotalPrice();
+    //assert
+    assertEquals(20, totalPrice);
   }
 
-  /**
-   * Tests the getExpirationDate method.
-   *
-   * @throws ParseException if there is an error during parsing
-   */
   @Test
-  void testGetExpirationDate() throws ParseException {
-    Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    LocalDate expirationDate = grocery.getExpirationDate();
-    LocalDate expectedDate = LocalDate.of(2004, 2, 19);
-    assertEquals(expectedDate, expirationDate);
+  void testGetExpirationDate() {
+    //arrange
+    setUp();
+    //act
+    LocalDate expirationDate = milk.getExpirationDate();
+    //assert
+    assertEquals(LocalDate.of(2025, 2, 19), expirationDate);
   }
 
-  /**
-   * Tests the isExpired method.
-   */
-  @Test
-  void testIsExpired() {
-    Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2004");
-    assertTrue(grocery.isExpired());
-  }
-
-  /**
-   * Tests the isExpired method for a non-expired grocery.
-   */
-  @Test
-  void IsNotExpired() {
-    Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2025");
-    assertFalse(grocery.isExpired());
-  }
-
-  /**
-   * Tests the addAmount method.
-   */
   @Test
   void testAddAmount() {
-    Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2025");
-    grocery.addAmount(1.0);
-    assertEquals(grocery.getAmount(), 2.0);
+    //arrange
+    setUp();
+    //act
+    milk.addAmount(1);
+    double amount = milk.getAmount();
+    //assert
+    assertEquals(2, amount);
   }
 
-  /**
-   * Tests the toString method.
-   */
   @Test
-  void testToString() {
-    Grocery grocery = new Grocery("Apple", "kg", 1.0, 10.0, "19.02.2025");
-    String expected = "Apple, 1.0 kg, 19.02.2025";
-    assertEquals(grocery.toString(), expected);
+  void testAddNegativeAmount() {
+    //arrange
+    setUp();
+    //assert
+    assertThrows(IllegalArgumentException.class, () -> milk.addAmount(-1));
   }
 
+  @Test
+  void testRemoveAmount() {
+    //arrange
+    setUp();
+    //act
+    milk.removeAmount(0.5);
+    double amount = milk.getAmount();
+    //assert
+    assertEquals(0.5, amount);
+  }
+
+  @Test
+  void testRemoveNegativeAmount() {
+    //arrange
+    setUp();
+    //assert
+    assertThrows(IllegalArgumentException.class, () -> milk.removeAmount(-1));
+  }
+
+  @Test
+  void testRemoveAmountExceedsCurrentAmount() {
+    //arrange
+    setUp();
+    //assert
+    assertThrows(IllegalArgumentException.class, () -> milk.removeAmount(2));
+  }
+
+  @Test
+  void testIsExpired() {
+    //arrange
+    setUp();
+    //act
+    boolean isExpired = bread.isExpired();
+    //assert
+    assertTrue(isExpired);
+  }
+
+  @Test
+  void testIsNotExpired() {
+    //arrange
+    setUp();
+    //act
+    boolean isExpired = cheese.isExpired();
+    //assert
+    assertFalse(isExpired);
+  }
+
+  @Test
+  void testExpireBefore() {
+    //arrange
+    setUp();
+    String date = "19.02.2027";
+    //act
+    boolean expireBefore = milk.expireBefore(date);
+    //assert
+    assertTrue(expireBefore);
+  }
+
+  @Test
+  void testExpireAfter() {
+    //arrange
+    setUp();
+    String date = "19.02.2022";
+    //act
+    boolean expireBefore = milk.expireBefore(date);
+    //assert
+    assertFalse(expireBefore);
+  }
 }
