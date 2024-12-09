@@ -4,10 +4,18 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 /**
- * Represents a cookbook containing a collection of recipes.
+ * Represents a Cook book to store Recipe items. The class contains a list of Recipe items from the
+ * Recipe class.
+ *
+ * @author Sindre Larsen Mjøs
+ * @version 2.0
+ * @since 01.11.2024
  */
 public class CookBook {
 
+  /**
+   * Variables
+   */
   private final ArrayList<Recipe> recipes;
 
   /**
@@ -24,7 +32,7 @@ public class CookBook {
    *
    * @param shortDescription the short description of the recipe
    * @return the index of the recipe
-   * @throws IllegalArgumentException if the recipe is not found
+   * @throws NoSuchElementException if the recipe is not found
    */
   public int getRecipeIndex(String shortDescription) {
     for (int recipeIndex = 0; recipeIndex < recipes.size(); recipeIndex++) {
@@ -32,7 +40,7 @@ public class CookBook {
         return recipeIndex;
       }
     }
-    throw new NoSuchElementException("Recipe not found in Cook Book");
+    throw new NoSuchElementException("Recipe not found in CookBook");
   }
 
   /**
@@ -40,7 +48,6 @@ public class CookBook {
    *
    * @param shortDescription the short description of the recipe
    * @return the recipe with the specified short description
-   * @throws IllegalArgumentException if the recipe is not found
    */
   public Recipe getRecipe(String shortDescription) {
     int recipeIndex = getRecipeIndex(shortDescription);
