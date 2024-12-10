@@ -131,4 +131,23 @@ class RecipeTest {
     // Assert
     assertFalse(isFoodStorage);
   }
+
+  @Test
+  void testGetRecipeInformation() {
+    //Arrange
+    setUp();
+    // Act
+    String recipeInformation = pancakeRecipe.getRecipeInformation();
+    System.out.println(recipeInformation); // Print the actual output for debugging
+    // Assert
+    assertEquals("Recipe: Pancakes\n"
+        + "Method: Mix all ingredients and fry.\n"
+        + "Number of portions: 4\n \n"
+        + "Groceries: \n"
+        + "Flour, 1.0kg, 20.0kr \n"
+        + "Milk, 1.0l, 15.0kr \n"
+        + "Eggs, 0.5kg, 25.0kr \n"
+        + "\nTotal price: 60.0kr \n", recipeInformation);
+  }
+
 }
