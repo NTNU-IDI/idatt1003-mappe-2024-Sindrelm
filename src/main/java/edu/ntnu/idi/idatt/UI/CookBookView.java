@@ -47,15 +47,15 @@ public class CookBookView {
         }
         case 1 -> {
           try {
-            System.out.println("Enter name of recipe:");
+            System.out.println("Enter short description of recipe:");
             String shortDescription = System.console().readLine();
             Recipe.verifyShortDescription(shortDescription);
 
-            System.out.println("Enter description of recipe:");
+            System.out.println("Enter method of recipe:");
             String method = System.console().readLine();
             Recipe.verifyMethod(method);
 
-            System.out.println("Enter number of servings:");
+            System.out.println("Enter number of portions:");
             int numberOfPortions = Integer.parseInt(System.console().readLine());
             Recipe.verifyNumberOfPortions(numberOfPortions);
 
