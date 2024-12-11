@@ -99,7 +99,8 @@ public class FoodStorageView {
         }
         case 4 -> foodStorage.getAlphabeticallySortedGroceries().forEach(System.out::println);
 
-        case 5 -> foodStorage.getExpiredGroceries().forEach(System.out::println);
+        case 5 -> foodStorage.getExpiredGroceries()
+            .forEach(grocery -> System.out.println(grocery.toString()));
 
         case 6 -> {
           try {
