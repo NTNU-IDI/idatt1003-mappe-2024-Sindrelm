@@ -230,7 +230,7 @@ public class Grocery {
    */
   public String toString() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-    return name + ", " + amount + " " + unit + ", " + expirationDate.format(
-        formatter);
+    return name + ", " + amount + " " + unit + ", " + expirationDate.format(formatter) + ", "
+        + getTotalPrice() + "kr";
   }
 }
