@@ -97,10 +97,23 @@ public class FoodStorageView {
             System.out.println(e.getMessage());
           }
         }
-        case 4 -> foodStorage.getAlphabeticallySortedGroceries().forEach(System.out::println);
+        case 4 -> {
+          foodStorage.getAlphabeticallySortedGroceries()
+              .forEach(grocery -> System.out.println(grocery.toString()));
+          double totalPrice = foodStorage.getAlphabeticallySortedGroceries().stream()
+              .mapToDouble(Grocery::getTotalPrice)
+              .sum();
+          System.out.println("Total price of Groceries: " + totalPrice + "kr");
+        }
 
-        case 5 -> foodStorage.getExpiredGroceries()
-            .forEach(grocery -> System.out.println(grocery.toString()));
+        case 5 -> {
+          foodStorage.getExpiredGroceries()
+              .forEach(grocery -> System.out.println(grocery.toString()));
+          double totalExpiredPrice = foodStorage.getExpiredGroceries().stream()
+              .mapToDouble(Grocery::getTotalPrice)
+              .sum();
+          System.out.println("Total price of expired Groceries: " + totalExpiredPrice + "kr");
+        }
 
         case 6 -> {
           try {
